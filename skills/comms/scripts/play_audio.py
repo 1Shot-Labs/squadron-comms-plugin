@@ -150,14 +150,14 @@ def main():
                 timeout=5
             )
             version_line = result.stdout.split('\n')[0] if result.stdout else "Unknown version"
-            print(f"✓ Found: {mpv_cmd}")
-            print(f"  Version: {version_line}")
+            print(f"[OK] Found: {mpv_cmd}")
+            print(f"     Version: {version_line}")
             sys.exit(0)
         except FileNotFoundError as e:
-            print(f"✗ {e}", file=sys.stderr)
+            print(f"[ERROR] {e}", file=sys.stderr)
             sys.exit(1)
         except Exception as e:
-            print(f"✗ Error checking mpv: {e}", file=sys.stderr)
+            print(f"[ERROR] Error checking mpv: {e}", file=sys.stderr)
             sys.exit(1)
 
     # Normal playback mode

@@ -15,15 +15,15 @@ Verify the environment variable is set:
 - On macOS/Linux: Check if `$ELEVENLABS_API_KEY` is set
 
 If not set:
-- ❌ **FAILED**: Environment variable not configured
+- [ERROR] **FAILED**: Environment variable not configured
 - Provide setup instructions for the user's platform
 
 If set but empty:
-- ⚠️ **WARNING**: Environment variable is set but empty
+- [WARN] **WARNING**: Environment variable is set but empty
 - Ask user to configure it properly
 
 If set with a value:
-- ✅ **PASSED**: Environment variable configured (show first 8 chars only for security)
+- [OK] **PASSED**: Environment variable configured (show first 8 chars only for security)
 
 ### 2. Check MPV Installation
 
@@ -44,11 +44,11 @@ The plugin supports multiple mpv variants:
 - Common installation paths on Windows are checked automatically
 
 If not found:
-- ❌ **FAILED**: mpv not installed or not in PATH
+- [ERROR] **FAILED**: mpv not installed or not in PATH
 - Provide installation instructions for user's platform
 
 If found:
-- ✅ **PASSED**: mpv installed at [path] (show version and variant)
+- [OK] **PASSED**: mpv installed at [path] (show version and variant)
 
 ### 3. Check Python and filelock Library
 
@@ -57,15 +57,15 @@ Verify Python and the filelock library:
 - Run: `python3 -c "import filelock; print(filelock.__version__)"` or `python -c "import filelock; print(filelock.__version__)"`
 
 If Python not found:
-- ❌ **FAILED**: Python not installed
+- [ERROR] **FAILED**: Python not installed
 - Provide installation instructions
 
 If filelock not found:
-- ⚠️ **WARNING**: filelock library not installed
+- [WARN] **WARNING**: filelock library not installed
 - Instruct: `pip install filelock` or `pip install -r ${CLAUDE_PLUGIN_ROOT}/requirements.txt`
 
 If both found:
-- ✅ **PASSED**: Python [version], filelock [version]
+- [OK] **PASSED**: Python [version], filelock [version]
 
 ### 4. Check ElevenLabs MCP Server Connection
 
@@ -74,13 +74,13 @@ Test the ElevenLabs MCP server:
 - Use: `mcp__elevenlabs__search_voices` tool with empty search
 
 If connection fails:
-- ❌ **FAILED**: Cannot connect to ElevenLabs API
+- [ERROR] **FAILED**: Cannot connect to ElevenLabs API
 - Check API key validity
 - Check internet connection
 - Verify MCP server is running
 
 If connection succeeds:
-- ✅ **PASSED**: Connected to ElevenLabs API
+- [OK] **PASSED**: Connected to ElevenLabs API
 - Show number of voices available
 
 ### 5. Check Squadron Voice Profiles
@@ -95,12 +95,12 @@ Verify the required voices are available:
 Use the voice list from step 4 to check availability.
 
 If any voices missing:
-- ⚠️ **WARNING**: Some squadron voices not available in your account
+- [WARN] **WARNING**: Some squadron voices not available in your account
 - List missing voices
 - Note: Voices can still work if they're in the professional voice library
 
 If all found:
-- ✅ **PASSED**: All squadron voice profiles available
+- [OK] **PASSED**: All squadron voice profiles available
 
 ### 6. Check File Permissions
 
@@ -111,11 +111,11 @@ Verify the plugin can write to necessary directories:
 Test by attempting to create a test file in each location.
 
 If write fails:
-- ❌ **FAILED**: Permission denied for [location]
+- [ERROR] **FAILED**: Permission denied for [location]
 - Provide troubleshooting steps
 
 If write succeeds:
-- ✅ **PASSED**: File permissions correct
+- [OK] **PASSED**: File permissions correct
 
 ### 7. Check Squadron Agents
 
@@ -123,11 +123,11 @@ Verify all agents are loaded:
 - Check that red-agent, gold-agent, blue-agent, green-agent are available
 
 If agents missing:
-- ⚠️ **WARNING**: Agents not loaded
+- [WARN] **WARNING**: Agents not loaded
 - Instruct user to restart Claude Code
 
 If all present:
-- ✅ **PASSED**: All 4 squadron agents loaded
+- [OK] **PASSED**: All 4 squadron agents loaded
 
 ## Output Format
 
@@ -137,13 +137,13 @@ Present results in a clear summary table:
 Squadron Comms Setup Verification
 ═════════════════════════════════════════════
 
-✅ ELEVENLABS_API_KEY:     Configured (sk_daf7a...)
-✅ MPV Media Player:       Installed (v0.38.0)
-✅ Python & filelock:      Python 3.12.1, filelock 3.20.3
-✅ ElevenLabs API:         Connected (42 voices available)
-⚠️  Squadron Voices:       4/5 available (Bill missing)
-✅ File Permissions:       Write access verified
-✅ Squadron Agents:        All 4 agents loaded
+[OK]   ELEVENLABS_API_KEY:     Configured (sk_daf7a...)
+[OK]   MPV Media Player:       Installed (mpvnet.exe v7.0.0)
+[OK]   Python & filelock:      Python 3.12.1, filelock 3.20.3
+[OK]   ElevenLabs API:         Connected (42 voices available)
+[WARN] Squadron Voices:        4/5 available (Bill missing)
+[OK]   File Permissions:       Write access verified
+[OK]   Squadron Agents:        All 4 agents loaded
 
 Overall Status: READY (1 warning)
 
