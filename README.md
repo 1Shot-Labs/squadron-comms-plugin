@@ -47,7 +47,7 @@ sudo dnf install mpv
 
 **Option A: From Marketplace (Recommended)**
 ```bash
-# Add the 1 Shot Labs marketplace
+# Add the 1Shot Labs marketplace
 /plugin marketplace add 1Shot-Labs/marketplace
 
 # Install the plugin
@@ -435,6 +435,6 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
-Made with ❤️ by [1 Shot Labs](https://1shotlabs.com)
+Made with ❤️ by [1Shot Labs](https://1shotlabs.com)
 
 **Ready to coordinate your squadron? Install now and deploy your agents!**

@@ -1,7 +1,7 @@
 {
   "name": "squadron-comms-marketplace",
   "owner": {
-    "name": "1 Shot Labs",
+    "name": "1Shot Labs",
     "email": "charles@1shotlabs.com"
   },
   "metadata": {
@@ -15,7 +15,7 @@
       "description": "Voice communication system with ElevenLabs TTS for multi-agent coordination. Spawn colored squadron agents (Red, Gold, Blue, Green) that broadcast voice updates while working on tasks.",
       "version": "1.0.0",
       "author": {
-        "name": "1 Shot Labs",
+        "name": "1Shot Labs",
         "email": "charles@1shotlabs.com"
       },
       "homepage": "https://github.com/1Shot-Labs/squadron-comms-plugin",
