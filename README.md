@@ -204,7 +204,9 @@ echo %ELEVENLABS_API_KEY%
 
 ### 4. Verify Installation
 
-Check that the plugin is loaded:
+**Important:** After installing the plugin, you need to **restart Claude Code** for the agents to become available.
+
+Exit Claude Code and restart it, then check that the agents are loaded:
 ```bash
 /agents
 ```
@@ -214,6 +216,8 @@ You should see the squadron agents listed:
 - `gold-agent` (Gold Squadron)
 - `blue-agent` (Blue Squadron)
 - `green-agent` (Green Squadron)
+
+> **Note:** If you don't see the agents after installation, restart Claude Code. Agents are loaded at session start.
 
 ## Usage
 

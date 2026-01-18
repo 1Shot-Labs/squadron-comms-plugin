@@ -66,8 +66,11 @@ source ~/.bashrc
 
 ## 5. Verify Installation
 
+**Important:** Restart Claude Code after installing the plugin.
+
 ```bash
-# Start Claude again
+# Exit Claude Code (Ctrl+D or type 'exit')
+# Then start it again
 claude
 
 # Check agents are available
@@ -79,6 +82,8 @@ You should see:
 - `gold-agent` (Analysis & Research)
 - `blue-agent` (Performance & Optimization)
 - `green-agent` (Polish & UX)
+
+> **Note:** Agents are loaded at session start. If you don't see them, restart Claude Code.
 
 ## 6. Test Voice Broadcast
 
@@ -132,9 +137,13 @@ echo $ELEVENLABS_API_KEY
 
 **Agents not showing?**
 ```bash
-# Reinstall plugin
+# Restart Claude Code first (agents load at session start)
+# Exit with Ctrl+D, then restart: claude
+
+# If still not showing, reinstall
 /plugin uninstall squadron-comms
 /plugin install squadron-comms
+# Then restart Claude Code again
 ```
 
 **Rate limit errors?**

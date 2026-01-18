@@ -143,7 +143,12 @@ Or set via GUI:
 5. Restart terminal
 
 **Step 4: Verify installation**
+
+**Important:** Restart Claude Code after installing the plugin for agents to load.
+
 ```bash
+# Exit Claude Code if running (Ctrl+D or type 'exit')
+# Then start it again
 claude
 ```
 
@@ -153,6 +158,8 @@ Then in Claude:
 ```
 
 You should see: `red-agent`, `gold-agent`, `blue-agent`, `green-agent`
+
+> **Note:** Agents are loaded at session start. If you installed the plugin while Claude Code was running, you must restart for the agents to appear.
 
 ### Method 2: Direct GitHub Clone
 
@@ -429,6 +436,26 @@ Can you list my ElevenLabs voices?
 If voices aren't available, you can:
 1. Use the voice library in ElevenLabs to add them
 2. Or modify the agent files to use different voice IDs from your account
+
+### Issue: "Agents not showing up after installation"
+
+**Cause:** Agents are loaded at session start and not dynamically loaded when plugins are installed.
+
+**Solution:**
+```bash
+# Exit Claude Code completely
+# Press Ctrl+D or type 'exit'
+
+# Start Claude Code again
+claude
+
+# Check agents
+/agents
+```
+
+You should now see all four squadron agents: `red-agent`, `gold-agent`, `blue-agent`, `green-agent`
+
+**Important:** Always restart Claude Code after installing or updating plugins that include agents.
 
 ## Updating the Plugin
 
