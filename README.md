@@ -32,16 +32,80 @@ A Claude Code plugin that enables voice broadcasting for coordinated multi-agent
 - `mpv` media player for audio playback
 
 **Install mpv:**
+
+<details>
+<summary><strong>macOS</strong></summary>
+
 ```bash
-# macOS
 brew install mpv
+```
 
-# Ubuntu/Debian
+Verify installation:
+```bash
+mpv --version
+```
+</details>
+
+<details>
+<summary><strong>Linux (Ubuntu/Debian)</strong></summary>
+
+```bash
+sudo apt update
 sudo apt install mpv
+```
 
-# Fedora
+Verify installation:
+```bash
+mpv --version
+```
+</details>
+
+<details>
+<summary><strong>Linux (Fedora/RHEL)</strong></summary>
+
+```bash
 sudo dnf install mpv
 ```
+
+Verify installation:
+```bash
+mpv --version
+```
+</details>
+
+<details>
+<summary><strong>Windows</strong></summary>
+
+**Option 1: Using Scoop (Recommended)**
+```powershell
+# Install Scoop if not already installed
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+irm get.scoop.sh | iex
+
+# Install mpv
+scoop install mpv
+```
+
+**Option 2: Using Chocolatey**
+```powershell
+# Run as Administrator
+choco install mpv
+```
+
+**Option 3: Manual Installation**
+1. Download mpv from [mpv.io/installation](https://mpv.io/installation/)
+2. Extract the archive to `C:\Program Files\mpv`
+3. Add to PATH:
+   - Open System Properties → Environment Variables
+   - Under System variables, select `Path` → Edit
+   - Add new entry: `C:\Program Files\mpv`
+   - Click OK
+
+Verify installation:
+```powershell
+mpv --version
+```
+</details>
 
 ### 2. Installation
 
@@ -67,17 +131,76 @@ claude --plugin-dir ./squadron-comms-plugin
 
 Set your ElevenLabs API key as an environment variable:
 
+<details>
+<summary><strong>macOS / Linux</strong></summary>
+
+**Temporary (current session only):**
 ```bash
 export ELEVENLABS_API_KEY="your_api_key_here"
 ```
 
-**Make it permanent:**
+**Permanent:**
 
-Add to your shell configuration file (`~/.bashrc`, `~/.zshrc`, etc.):
+Add to your shell configuration file:
 ```bash
+# For bash
 echo 'export ELEVENLABS_API_KEY="your_api_key_here"' >> ~/.bashrc
 source ~/.bashrc
+
+# For zsh
+echo 'export ELEVENLABS_API_KEY="your_api_key_here"' >> ~/.zshrc
+source ~/.zshrc
 ```
+
+Verify it's set:
+```bash
+echo $ELEVENLABS_API_KEY
+```
+</details>
+
+<details>
+<summary><strong>Windows</strong></summary>
+
+**Temporary (current session only):**
+
+PowerShell:
+```powershell
+$env:ELEVENLABS_API_KEY="your_api_key_here"
+```
+
+Command Prompt:
+```cmd
+set ELEVENLABS_API_KEY=your_api_key_here
+```
+
+**Permanent (User-level):**
+
+PowerShell (recommended):
+```powershell
+[System.Environment]::SetEnvironmentVariable('ELEVENLABS_API_KEY', 'your_api_key_here', 'User')
+```
+
+Or via GUI:
+1. Open Start Menu → Search "Environment Variables"
+2. Click "Edit environment variables for your account"
+3. Under "User variables", click "New"
+4. Variable name: `ELEVENLABS_API_KEY`
+5. Variable value: `your_api_key_here`
+6. Click OK
+7. **Restart your terminal/PowerShell** for changes to take effect
+
+Verify it's set:
+
+PowerShell:
+```powershell
+$env:ELEVENLABS_API_KEY
+```
+
+Command Prompt:
+```cmd
+echo %ELEVENLABS_API_KEY%
+```
+</details>
 
 ### 4. Verify Installation
 

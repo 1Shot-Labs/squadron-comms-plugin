@@ -55,7 +55,28 @@ sudo pacman -S mpv
 ```
 
 **Windows:**
-Download from [mpv.io](https://mpv.io/installation/) and add to PATH.
+
+Option 1 - Using Scoop (Recommended):
+```powershell
+# Install Scoop if not already installed
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+irm get.scoop.sh | iex
+
+# Install mpv
+scoop install mpv
+```
+
+Option 2 - Using Chocolatey:
+```powershell
+# Run as Administrator
+choco install mpv
+```
+
+Option 3 - Manual Installation:
+1. Download mpv from [mpv.io/installation](https://mpv.io/installation/)
+2. Extract to `C:\Program Files\mpv`
+3. Add to PATH via System Properties → Environment Variables
+4. Add new System variable Path entry: `C:\Program Files\mpv`
 
 Verify MPV installation:
 ```bash
@@ -84,6 +105,8 @@ Then in Claude:
 ```
 
 **Step 3: Configure ElevenLabs API key**
+
+**macOS / Linux:**
 ```bash
 export ELEVENLABS_API_KEY="your_api_key_here"
 ```
@@ -98,6 +121,26 @@ source ~/.bashrc
 echo 'export ELEVENLABS_API_KEY="your_api_key_here"' >> ~/.zshrc
 source ~/.zshrc
 ```
+
+**Windows:**
+
+PowerShell (temporary):
+```powershell
+$env:ELEVENLABS_API_KEY="your_api_key_here"
+```
+
+PowerShell (permanent):
+```powershell
+[System.Environment]::SetEnvironmentVariable('ELEVENLABS_API_KEY', 'your_api_key_here', 'User')
+# Restart your terminal for changes to take effect
+```
+
+Or set via GUI:
+1. Start Menu → Search "Environment Variables"
+2. "Edit environment variables for your account"
+3. New → Variable name: `ELEVENLABS_API_KEY`
+4. Variable value: your API key
+5. Restart terminal
 
 **Step 4: Verify installation**
 ```bash

@@ -4,12 +4,27 @@ Get Squadron Comms Plugin running in 5 minutes.
 
 ## 1. Install Prerequisites
 
+**macOS:**
 ```bash
-# Install MPV (choose your OS)
-brew install mpv                    # macOS
+brew install mpv
+```
+
+**Linux:**
+```bash
 sudo apt install mpv                # Ubuntu/Debian
 sudo dnf install mpv                # Fedora
 ```
+
+**Windows:**
+```powershell
+# Using Scoop (recommended)
+scoop install mpv
+
+# Or using Chocolatey (as Administrator)
+choco install mpv
+```
+
+*Manual installation: Download from [mpv.io](https://mpv.io/installation/) and add to PATH*
 
 ## 2. Get ElevenLabs API Key
 
@@ -31,13 +46,22 @@ claude
 
 ## 4. Configure API Key
 
+**macOS / Linux:**
 ```bash
 # Set your ElevenLabs API key
 export ELEVENLABS_API_KEY="your_api_key_here"
 
-# Make it permanent (choose your shell)
+# Make it permanent
 echo 'export ELEVENLABS_API_KEY="your_api_key_here"' >> ~/.bashrc
 source ~/.bashrc
+```
+
+**Windows (PowerShell):**
+```powershell
+# Set permanently (user-level)
+[System.Environment]::SetEnvironmentVariable('ELEVENLABS_API_KEY', 'your_api_key_here', 'User')
+
+# Restart your terminal
 ```
 
 ## 5. Verify Installation
