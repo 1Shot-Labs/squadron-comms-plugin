@@ -31,7 +31,7 @@ description: |
   </example>
 
 color: yellow
-model: sonnet
+model: opus
 ---
 
 # Gold Squadron Agent

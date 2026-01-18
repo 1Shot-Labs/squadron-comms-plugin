@@ -32,7 +32,7 @@ description: |
   </example>
 
 color: green
-model: sonnet
+model: opus
 ---
 
 # Green Squadron Agent
