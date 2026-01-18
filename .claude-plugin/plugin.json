@@ -19,8 +19,8 @@
     "communication",
     "squadron"
   ],
-  "commands": "./commands/",
-  "agents": "./agents/",
-  "skills": "./skills/",
+  "commands": "./commands",
+  "agents": "./agents",
+  "skills": "./skills",
   "mcpServers": "./.mcp.json"
 }
