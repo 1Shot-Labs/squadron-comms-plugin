@@ -105,7 +105,12 @@ choco install mpv
 Verify installation:
 ```powershell
 mpv --version
+# or if using mpv.net:
+mpvnet --version
 ```
+
+> **Note:** The plugin automatically detects both `mpv` and `mpvnet.exe` variants on Windows, so either will work.
+
 </details>
 
 ### 2. Installation

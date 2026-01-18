@@ -27,16 +27,28 @@ If set with a value:
 
 ### 2. Check MPV Installation
 
-Test if mpv is installed and accessible:
-- Run: `which mpv` (Unix) or `where mpv` (Windows)
-- Run: `mpv --version` to verify it works
+Test if mpv is installed and accessible using the plugin's detection logic:
+
+```bash
+python3 ${CLAUDE_PLUGIN_ROOT}/skills/comms/scripts/play_audio.py --check-mpv
+```
+
+Or manually check:
+- Unix: `which mpv` or `which mpvnet`
+- Windows: `where mpv` or `where mpvnet.exe`
+- Run: `mpv --version` or `mpvnet --version` to verify it works
+
+The plugin supports multiple mpv variants:
+- `mpv` (standard on Unix, available via Scoop/Chocolatey on Windows)
+- `mpvnet.exe` (mpv.net on Windows)
+- Common installation paths on Windows are checked automatically
 
 If not found:
 - ❌ **FAILED**: mpv not installed or not in PATH
 - Provide installation instructions for user's platform
 
 If found:
-- ✅ **PASSED**: mpv installed at [path] (show version)
+- ✅ **PASSED**: mpv installed at [path] (show version and variant)
 
 ### 3. Check Python and filelock Library
 

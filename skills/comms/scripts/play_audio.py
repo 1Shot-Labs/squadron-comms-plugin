@@ -14,7 +14,9 @@ Requirements:
 """
 
 import sys
+import os
 import json
+import shutil
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
@@ -25,6 +27,43 @@ except ImportError:
     print("Error: filelock library not installed", file=sys.stderr)
     print("Install with: pip install filelock", file=sys.stderr)
     sys.exit(1)
+
+
+def get_mpv_command() -> str:
+    """
+    Get the appropriate mpv command for the current platform.
+
+    Returns:
+        str: The mpv command to use
+
+    Raises:
+        FileNotFoundError: If mpv is not found on the system
+    """
+    # Try different mpv variants
+    for cmd in ['mpv', 'mpvnet.exe', 'mpvnet']:
+        if shutil.which(cmd):
+            return cmd
+
+    # Try common installation paths on Windows
+    if sys.platform == 'win32':
+        username = os.getenv('USERNAME', '')
+        common_paths = [
+            rf"C:\Users\{username}\AppData\Local\Programs\mpv.net\mpvnet.exe",
+            r"C:\Program Files\mpv.net\mpvnet.exe",
+            r"C:\Program Files (x86)\mpv.net\mpvnet.exe",
+            rf"C:\Users\{username}\scoop\apps\mpv\current\mpv.exe",
+            r"C:\ProgramData\chocolatey\bin\mpv.exe",
+        ]
+        for path in common_paths:
+            if os.path.exists(path):
+                return path
+
+    raise FileNotFoundError(
+        "mpv not found. Please install mpv:\n"
+        "  Windows: scoop install mpv  or  choco install mpv\n"
+        "  macOS: brew install mpv\n"
+        "  Linux: sudo apt install mpv"
+    )
 
 
 def play_audio_with_lock(audio_file: str, lock_file: str, log_file: str,
@@ -56,6 +95,13 @@ def play_audio_with_lock(audio_file: str, lock_file: str, log_file: str,
     # Create log file parent directory if needed
     log_path.parent.mkdir(parents=True, exist_ok=True)
 
+    # Get the correct mpv command for the platform
+    try:
+        mpv_cmd = get_mpv_command()
+    except FileNotFoundError as e:
+        print(str(e), file=sys.stderr)
+        sys.exit(1)
+
     # Acquire lock and play audio
     lock = FileLock(str(lock_path), timeout=30)
 
@@ -63,15 +109,15 @@ def play_audio_with_lock(audio_file: str, lock_file: str, log_file: str,
         with lock:
             # Play audio with mpv
             result = subprocess.run(
-                ["mpv", "--no-video", "--really-quiet", str(audio_path)],
+                [mpv_cmd, "--no-video", "--really-quiet", str(audio_path)],
                 capture_output=True,
                 text=True
             )
 
             if result.returncode != 0:
-                print(f"Warning: mpv exited with code {result.returncode}", file=sys.stderr)
+                print(f"Warning: {mpv_cmd} exited with code {result.returncode}", file=sys.stderr)
                 if result.stderr:
-                    print(f"mpv error: {result.stderr}", file=sys.stderr)
+                    print(f"{mpv_cmd} error: {result.stderr}", file=sys.stderr)
 
             # Log the broadcast
             timestamp = datetime.now(timezone.utc).isoformat(timespec='milliseconds').replace('+00:00', 'Z')
@@ -92,9 +138,33 @@ def play_audio_with_lock(audio_file: str, lock_file: str, log_file: str,
 
 
 def main():
+    # Check for --check-mpv flag
+    if len(sys.argv) == 2 and sys.argv[1] == '--check-mpv':
+        try:
+            mpv_cmd = get_mpv_command()
+            # Try to get version
+            result = subprocess.run(
+                [mpv_cmd, '--version'],
+                capture_output=True,
+                text=True,
+                timeout=5
+            )
+            version_line = result.stdout.split('\n')[0] if result.stdout else "Unknown version"
+            print(f"✓ Found: {mpv_cmd}")
+            print(f"  Version: {version_line}")
+            sys.exit(0)
+        except FileNotFoundError as e:
+            print(f"✗ {e}", file=sys.stderr)
+            sys.exit(1)
+        except Exception as e:
+            print(f"✗ Error checking mpv: {e}", file=sys.stderr)
+            sys.exit(1)
+
+    # Normal playback mode
     if len(sys.argv) != 7:
         print("Usage: play_audio.py <audio_file> <lock_file> <log_file> <call_sign> <squadron> <message>",
               file=sys.stderr)
+        print("   or: play_audio.py --check-mpv", file=sys.stderr)
         sys.exit(1)
 
     audio_file = sys.argv[1]
