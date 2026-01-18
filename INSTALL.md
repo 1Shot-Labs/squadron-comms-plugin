@@ -208,15 +208,15 @@ For team-wide plugin usage, add to `.claude/settings.json`:
 ```json
 {
   "extraKnownMarketplaces": {
-    "squadron-comms": {
+    "1shot": {
       "source": {
         "source": "github",
-        "repo": "1Shot-Labs/squadron-comms-plugin"
+        "repo": "1Shot-Labs/marketplace"
       }
     }
   },
   "enabledPlugins": {
-    "squadron-comms@squadron-comms": true
+    "squadron-comms@1shot": true
   }
 }
 ```
@@ -462,7 +462,7 @@ Then restart Claude Code.
 ### Remove Marketplace
 
 ```
-/plugin marketplace remove squadron-comms
+/plugin marketplace remove 1shot
 ```
 
 ### Delete Local Files
