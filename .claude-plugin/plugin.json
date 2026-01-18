@@ -20,7 +20,12 @@
     "squadron"
   ],
   "commands": "./commands/",
-  "agents": "./agents/",
+  "agents": [
+    "./agents/red-agent.md",
+    "./agents/gold-agent.md",
+    "./agents/blue-agent.md",
+    "./agents/green-agent.md"
+  ],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json"
 }
