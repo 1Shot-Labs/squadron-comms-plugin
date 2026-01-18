@@ -61,7 +61,7 @@ source ~/.bashrc
 # Set permanently (user-level)
 [System.Environment]::SetEnvironmentVariable('ELEVENLABS_API_KEY', 'your_api_key_here', 'User')
 
-# Restart your terminal
+# Restart Claude Code for changes to take effect
 ```
 
 ## 5. Verify Installation

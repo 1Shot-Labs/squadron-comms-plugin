@@ -187,7 +187,7 @@ Or via GUI:
 4. Variable name: `ELEVENLABS_API_KEY`
 5. Variable value: `your_api_key_here`
 6. Click OK
-7. **Restart your terminal/PowerShell** for changes to take effect
+7. **Restart Claude Code** for changes to take effect
 
 Verify it's set:
 

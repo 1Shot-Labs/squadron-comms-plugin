@@ -132,7 +132,7 @@ $env:ELEVENLABS_API_KEY="your_api_key_here"
 PowerShell (permanent):
 ```powershell
 [System.Environment]::SetEnvironmentVariable('ELEVENLABS_API_KEY', 'your_api_key_here', 'User')
-# Restart your terminal for changes to take effect
+# Restart Claude Code for changes to take effect
 ```
 
 Or set via GUI:
@@ -140,7 +140,8 @@ Or set via GUI:
 2. "Edit environment variables for your account"
 3. New → Variable name: `ELEVENLABS_API_KEY`
 4. Variable value: your API key
-5. Restart terminal
+5. Click OK
+6. Restart Claude Code
 
 **Step 4: Verify installation**
 
