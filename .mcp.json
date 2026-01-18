@@ -1,0 +1,13 @@
+{
+  "$schema": "https://mcp.run/schema.json",
+  "mcpServers": {
+    "elevenlabs": {
+      "command": "uvx",
+      "args": ["mcp-eleven-labs"],
+      "env": {
+        "ELEVENLABS_API_KEY": "${ELEVENLABS_API_KEY}"
+      },
+      "disabled": false
+    }
+  }
+}

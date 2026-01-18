@@ -1,0 +1,33 @@
+# Audio files
+skills/comms/.audio/*.mp3
+skills/comms/.audio/*.wav
+
+# Mission log (optional - users may want to track this)
+# Uncomment if you don't want to track mission logs in git
+# skills/comms/mission-log.jsonl
+
+# Lock files
+skills/comms/.audio.lock
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node modules (if you add any npm scripts)
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.log

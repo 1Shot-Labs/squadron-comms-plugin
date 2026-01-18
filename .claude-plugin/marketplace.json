@@ -1,0 +1,38 @@
+{
+  "name": "squadron-comms-marketplace",
+  "owner": {
+    "name": "1 Shot Labs",
+    "email": "charles@1shotlabs.com"
+  },
+  "metadata": {
+    "description": "Squadron voice communication system for Claude Code",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "squadron-comms",
+      "source": ".",
+      "description": "Voice communication system with ElevenLabs TTS for multi-agent coordination. Spawn colored squadron agents (Red, Gold, Blue, Green) that broadcast voice updates while working on tasks.",
+      "version": "1.0.0",
+      "author": {
+        "name": "1 Shot Labs",
+        "email": "charles@1shotlabs.com"
+      },
+      "homepage": "https://github.com/1shot-labs/squadron-comms-plugin",
+      "repository": "https://github.com/1shot-labs/squadron-comms-plugin",
+      "license": "MIT",
+      "keywords": [
+        "voice",
+        "tts",
+        "elevenlabs",
+        "agents",
+        "coordination",
+        "communication",
+        "squadron",
+        "multi-agent"
+      ],
+      "category": "productivity",
+      "strict": true
+    }
+  ]
+}
