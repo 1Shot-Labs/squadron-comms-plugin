@@ -5,13 +5,13 @@ Instructions for pushing the plugin to GitHub and creating releases.
 ## Prerequisites
 
 - Git configured with your GitHub credentials
-- GitHub repository created at: https://github.com/1shot-labs/squadron-comms-plugin
+- GitHub repository created at: https://github.com/1Shot-Labs/squadron-comms-plugin
 
 ## Initial Push to GitHub
 
 ### Step 1: Create GitHub Repository
 
-1. Go to https://github.com/1shot-labs
+1. Go to https://github.com/1Shot-Labs
 2. Click "New repository"
 3. Name: `squadron-comms-plugin`
 4. Description: "Voice communication system with ElevenLabs TTS for multi-agent coordination in Claude Code"
@@ -39,14 +39,14 @@ Delta compression using up to 8 threads
 Compressing objects: 100% (18/18), done.
 Writing objects: 100% (20/20), XX.XX KiB | XX.XX MiB/s, done.
 Total 20 (delta X), reused 0 (delta 0), pack-reused 0
-To https://github.com/1shot-labs/squadron-comms-plugin.git
+To https://github.com/1Shot-Labs/squadron-comms-plugin.git
  * [new branch]      main -> main
  * [new tag]         v1.0.0 -> v1.0.0
 ```
 
 ### Step 3: Verify on GitHub
 
-Visit https://github.com/1shot-labs/squadron-comms-plugin and verify:
+Visit https://github.com/1Shot-Labs/squadron-comms-plugin and verify:
 - All files are present
 - README displays correctly
 - Badges show up
@@ -56,7 +56,7 @@ Visit https://github.com/1shot-labs/squadron-comms-plugin and verify:
 
 ### Step 1: Navigate to Releases
 
-1. Go to https://github.com/1shot-labs/squadron-comms-plugin
+1. Go to https://github.com/1Shot-Labs/squadron-comms-plugin
 2. Click "Releases" in the right sidebar
 3. Click "Draft a new release"
 
@@ -94,23 +94,23 @@ Voice communication system with ElevenLabs TTS for multi-agent coordination.
 
 ```bash
 # Add the marketplace
-/plugin marketplace add 1shot-labs/squadron-comms-plugin
+/plugin marketplace add 1Shot-Labs/squadron-comms-plugin
 
 # Install the plugin
 /plugin install squadron-comms
 ```
 
-See [INSTALL.md](https://github.com/1shot-labs/squadron-comms-plugin/blob/main/INSTALL.md) for detailed installation instructions.
+See [INSTALL.md](https://github.com/1Shot-Labs/squadron-comms-plugin/blob/main/INSTALL.md) for detailed installation instructions.
 
 ## Quick Start
 
-See [QUICKSTART.md](https://github.com/1shot-labs/squadron-comms-plugin/blob/main/QUICKSTART.md) for a 5-minute setup guide.
+See [QUICKSTART.md](https://github.com/1Shot-Labs/squadron-comms-plugin/blob/main/QUICKSTART.md) for a 5-minute setup guide.
 
 ## Documentation
 
-- [README.md](https://github.com/1shot-labs/squadron-comms-plugin/blob/main/README.md) - Complete usage guide
-- [SKILL.md](https://github.com/1shot-labs/squadron-comms-plugin/blob/main/skills/comms/SKILL.md) - Comms skill documentation
-- [Examples](https://github.com/1shot-labs/squadron-comms-plugin/blob/main/skills/comms/examples/broadcast-examples.md) - Broadcast examples
+- [README.md](https://github.com/1Shot-Labs/squadron-comms-plugin/blob/main/README.md) - Complete usage guide
+- [SKILL.md](https://github.com/1Shot-Labs/squadron-comms-plugin/blob/main/skills/comms/SKILL.md) - Comms skill documentation
+- [Examples](https://github.com/1Shot-Labs/squadron-comms-plugin/blob/main/skills/comms/examples/broadcast-examples.md) - Broadcast examples
 
 ## Requirements
 
@@ -120,7 +120,7 @@ See [QUICKSTART.md](https://github.com/1shot-labs/squadron-comms-plugin/blob/mai
 
 ---
 
-**Full Changelog**: https://github.com/1shot-labs/squadron-comms-plugin/blob/main/CHANGELOG.md
+**Full Changelog**: https://github.com/1Shot-Labs/squadron-comms-plugin/blob/main/CHANGELOG.md
 ```
 
 **Check:** ✅ Set as the latest release
@@ -188,7 +188,7 @@ Follow the same process as above with updated version and changelog.
 gh auth login
 
 # Or use personal access token
-git remote set-url origin https://YOUR_TOKEN@github.com/1shot-labs/squadron-comms-plugin.git
+git remote set-url origin https://YOUR_TOKEN@github.com/1Shot-Labs/squadron-comms-plugin.git
 ```
 
 ### Tag Already Exists
@@ -218,7 +218,7 @@ After deployment, verify users can install:
 
 ```bash
 # In a clean Claude Code session
-/plugin marketplace add 1shot-labs/squadron-comms-plugin
+/plugin marketplace add 1Shot-Labs/squadron-comms-plugin
 /plugin install squadron-comms
 /agents
 ```

@@ -75,7 +75,7 @@ claude
 
 Then in Claude:
 ```
-/plugin marketplace add 1shot-labs/squadron-comms-plugin
+/plugin marketplace add 1Shot-Labs/squadron-comms-plugin
 ```
 
 **Step 2: Install the plugin**
@@ -118,7 +118,7 @@ For development or if you want the latest code.
 **Step 1: Clone the repository**
 ```bash
 cd ~/Downloads  # or your preferred directory
-git clone https://github.com/1shot-labs/squadron-comms-plugin.git
+git clone https://github.com/1Shot-Labs/squadron-comms-plugin.git
 ```
 
 **Step 2: Launch Claude with the plugin**
@@ -168,7 +168,7 @@ For team-wide plugin usage, add to `.claude/settings.json`:
     "squadron-comms": {
       "source": {
         "source": "github",
-        "repo": "1shot-labs/squadron-comms-plugin"
+        "repo": "1Shot-Labs/squadron-comms-plugin"
       }
     }
   },
@@ -453,9 +453,9 @@ After successful installation:
 
 If you encounter issues not covered here:
 
-- **GitHub Issues**: [Report a bug](https://github.com/1shot-labs/squadron-comms-plugin/issues)
-- **Discussions**: [Ask questions](https://github.com/1shot-labs/squadron-comms-plugin/discussions)
-- **Documentation**: [Wiki](https://github.com/1shot-labs/squadron-comms-plugin/wiki)
+- **GitHub Issues**: [Report a bug](https://github.com/1Shot-Labs/squadron-comms-plugin/issues)
+- **Discussions**: [Ask questions](https://github.com/1Shot-Labs/squadron-comms-plugin/discussions)
+- **Documentation**: [Wiki](https://github.com/1Shot-Labs/squadron-comms-plugin/wiki)
 
 ---
 

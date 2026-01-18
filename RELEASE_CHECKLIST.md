@@ -7,7 +7,7 @@ Complete checklist to ensure the plugin is ready for public release.
 ### Repository Setup
 - [x] Git repository initialized
 - [x] Main branch created
-- [x] Remote origin configured: https://github.com/1shot-labs/squadron-comms-plugin.git
+- [x] Remote origin configured: https://github.com/1Shot-Labs/squadron-comms-plugin.git
 - [x] Initial commit created
 - [x] Version tag v1.0.0 created
 - [x] All files added and committed
@@ -43,7 +43,7 @@ Complete checklist to ensure the plugin is ready for public release.
 - [x] .env.example template provided
 
 ### Branding
-- [x] All references updated to "1shot-labs" (not "1-shot-labs")
+- [x] All references updated to "1Shot-Labs" (not "1-shot-labs")
 - [x] Consistent organization name throughout
 - [x] GitHub URLs correct
 - [x] Email addresses correct
@@ -53,7 +53,7 @@ Complete checklist to ensure the plugin is ready for public release.
 
 ### 1. Create GitHub Repository
 
-**Go to:** https://github.com/1shot-labs
+**Go to:** https://github.com/1Shot-Labs
 
 1. Click "New repository"
 2. Repository name: `squadron-comms-plugin`
@@ -78,7 +78,7 @@ Expected: Both main branch and v1.0.0 tag pushed successfully
 
 ### 3. Create GitHub Release
 
-1. Go to: https://github.com/1shot-labs/squadron-comms-plugin/releases
+1. Go to: https://github.com/1Shot-Labs/squadron-comms-plugin/releases
 2. Click "Draft a new release"
 3. Choose tag: `v1.0.0`
 4. Release title: `v1.0.0 - Initial Release`
@@ -88,7 +88,7 @@ Expected: Both main branch and v1.0.0 tag pushed successfully
 
 ### 4. Verify Repository
 
-- [ ] Visit https://github.com/1shot-labs/squadron-comms-plugin
+- [ ] Visit https://github.com/1Shot-Labs/squadron-comms-plugin
 - [ ] Verify README displays with badges
 - [ ] Check all files are present
 - [ ] Verify tag and release are visible
@@ -102,7 +102,7 @@ From a clean Claude Code session:
 
 ```bash
 # Add marketplace
-/plugin marketplace add 1shot-labs/squadron-comms-plugin
+/plugin marketplace add 1Shot-Labs/squadron-comms-plugin
 
 # Install plugin
 /plugin install squadron-comms
@@ -158,9 +158,9 @@ Voice communication system for Claude Code with:
 • Mission logging and coordination
 • Multi-agent parallel operations
 
-Install: /plugin marketplace add 1shot-labs/squadron-comms-plugin
+Install: /plugin marketplace add 1Shot-Labs/squadron-comms-plugin
 
-https://github.com/1shot-labs/squadron-comms-plugin
+https://github.com/1Shot-Labs/squadron-comms-plugin
 ```
 
 ## 🔍 Post-Release Verification

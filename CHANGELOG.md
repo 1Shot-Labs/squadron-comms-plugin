@@ -55,4 +55,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[1.0.0]: https://github.com/1shot-labs/squadron-comms-plugin/releases/tag/v1.0.0
+[1.0.0]: https://github.com/1Shot-Labs/squadron-comms-plugin/releases/tag/v1.0.0

@@ -10,7 +10,7 @@ Be respectful, inclusive, and professional in all interactions.
 
 ### Reporting Bugs
 
-1. Check if the bug has already been reported in [Issues](https://github.com/1shot-labs/squadron-comms-plugin/issues)
+1. Check if the bug has already been reported in [Issues](https://github.com/1Shot-Labs/squadron-comms-plugin/issues)
 2. If not, create a new issue with:
    - Clear title describing the bug
    - Steps to reproduce
@@ -21,7 +21,7 @@ Be respectful, inclusive, and professional in all interactions.
 
 ### Suggesting Features
 
-1. Check [Discussions](https://github.com/1shot-labs/squadron-comms-plugin/discussions) for similar ideas
+1. Check [Discussions](https://github.com/1Shot-Labs/squadron-comms-plugin/discussions) for similar ideas
 2. Create a new discussion with:
    - Clear description of the feature
    - Use case and benefits
@@ -287,9 +287,9 @@ Maintainers will:
 
 ## Questions?
 
-- Open a [Discussion](https://github.com/1shot-labs/squadron-comms-plugin/discussions)
+- Open a [Discussion](https://github.com/1Shot-Labs/squadron-comms-plugin/discussions)
 - Ask in your PR
-- Check existing [Issues](https://github.com/1shot-labs/squadron-comms-plugin/issues)
+- Check existing [Issues](https://github.com/1Shot-Labs/squadron-comms-plugin/issues)
 
 ## Recognition
 

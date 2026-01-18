@@ -1,6 +1,6 @@
 # Squadron Comms Plugin
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/1shot-labs/squadron-comms-plugin/releases)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/1Shot-Labs/squadron-comms-plugin/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-blueviolet.svg)](https://claude.ai/code)
 [![ElevenLabs](https://img.shields.io/badge/ElevenLabs-TTS-green.svg)](https://elevenlabs.io)
@@ -48,7 +48,7 @@ sudo dnf install mpv
 **Option A: From GitHub (Recommended)**
 ```bash
 # Add the plugin marketplace
-/plugin marketplace add 1shot-labs/squadron-comms-plugin
+/plugin marketplace add 1Shot-Labs/squadron-comms-plugin
 
 # Install the plugin
 /plugin install squadron-comms
@@ -57,7 +57,7 @@ sudo dnf install mpv
 **Option B: Local Development**
 ```bash
 # Clone the repository
-git clone https://github.com/1shot-labs/squadron-comms-plugin.git
+git clone https://github.com/1Shot-Labs/squadron-comms-plugin.git
 
 # Load the plugin
 claude --plugin-dir ./squadron-comms-plugin
@@ -429,9 +429,9 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/1shot-labs/squadron-comms-plugin/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/1shot-labs/squadron-comms-plugin/discussions)
-- **Documentation**: [Wiki](https://github.com/1shot-labs/squadron-comms-plugin/wiki)
+- **Issues**: [GitHub Issues](https://github.com/1Shot-Labs/squadron-comms-plugin/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/1Shot-Labs/squadron-comms-plugin/discussions)
+- **Documentation**: [Wiki](https://github.com/1Shot-Labs/squadron-comms-plugin/wiki)
 
 ---
 

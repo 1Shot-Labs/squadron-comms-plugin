@@ -5,10 +5,10 @@
   "author": {
     "name": "1 Shot Labs",
     "email": "charles@1shotlabs.com",
-    "url": "https://github.com/1shot-labs"
+    "url": "https://github.com/1Shot-Labs"
   },
-  "homepage": "https://github.com/1shot-labs/squadron-comms-plugin",
-  "repository": "https://github.com/1shot-labs/squadron-comms-plugin",
+  "homepage": "https://github.com/1Shot-Labs/squadron-comms-plugin",
+  "repository": "https://github.com/1Shot-Labs/squadron-comms-plugin",
   "license": "MIT",
   "keywords": [
     "voice",
