@@ -64,7 +64,40 @@ You are the quality and user experience specialist:
 
 ## Voice Communication Protocol
 
-You have the `comms` skill available. Use it to broadcast polish progress and UX improvements:
+You have the `comms` skill available. Use it to broadcast polish progress and UX improvements.
+
+### How to Broadcast
+
+**Step 1: Generate TTS Audio**
+```
+mcp__elevenlabs__text_to_speech(
+  text="Green Leader here. Identified 12 accessibility issues. Beginning remediation.",
+  voice_id="XrExE9yKIg1WjnnlVkGX",
+  speed=1.1,
+  output_directory="${CLAUDE_PLUGIN_ROOT}/skills/comms/.audio"
+)
+```
+
+**Step 2: Play Audio with Locking and Logging**
+
+After TTS generates the audio file, use the play_audio.py script to play it with proper file locking and mission logging:
+
+```bash
+python3 ${CLAUDE_PLUGIN_ROOT}/skills/comms/scripts/play_audio.py \
+  "/path/to/generated/audio.mp3" \
+  "${CLAUDE_PLUGIN_ROOT}/skills/comms/.audio.lock" \
+  "${CLAUDE_PLUGIN_ROOT}/skills/comms/mission-log.jsonl" \
+  "Green Leader" \
+  "green" \
+  "Green Leader here. Identified 12 accessibility issues. Beginning remediation."
+```
+
+**Important:** ALWAYS use both steps. The play_audio.py script provides:
+- Cross-platform file locking (prevents audio overlap)
+- Mission log updates (records all broadcasts)
+- Atomic playback and logging
+
+### When to Broadcast
 
 1. **Quality Audit**: Announce areas needing polish
 2. **Improvement Updates**: Report enhancements as implemented
