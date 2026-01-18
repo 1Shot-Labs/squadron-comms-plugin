@@ -102,7 +102,7 @@ From a clean Claude Code session:
 
 ```bash
 # Add marketplace
-/plugin marketplace add 1Shot-Labs/squadron-comms-plugin
+/plugin marketplace add 1Shot-Labs/marketplace
 
 # Install plugin
 /plugin install squadron-comms
@@ -158,7 +158,7 @@ Voice communication system for Claude Code with:
 • Mission logging and coordination
 • Multi-agent parallel operations
 
-Install: /plugin marketplace add 1Shot-Labs/squadron-comms-plugin
+Install: /plugin marketplace add 1Shot-Labs/marketplace
 
 https://github.com/1Shot-Labs/squadron-comms-plugin
 ```

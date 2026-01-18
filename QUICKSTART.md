@@ -25,7 +25,7 @@ sudo dnf install mpv                # Fedora
 claude
 
 # In Claude, add marketplace and install plugin
-/plugin marketplace add 1Shot-Labs/squadron-comms-plugin
+/plugin marketplace add 1Shot-Labs/marketplace
 /plugin install squadron-comms
 ```
 

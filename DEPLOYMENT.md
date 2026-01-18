@@ -94,7 +94,7 @@ Voice communication system with ElevenLabs TTS for multi-agent coordination.
 
 ```bash
 # Add the marketplace
-/plugin marketplace add 1Shot-Labs/squadron-comms-plugin
+/plugin marketplace add 1Shot-Labs/marketplace
 
 # Install the plugin
 /plugin install squadron-comms
@@ -218,7 +218,7 @@ After deployment, verify users can install:
 
 ```bash
 # In a clean Claude Code session
-/plugin marketplace add 1Shot-Labs/squadron-comms-plugin
+/plugin marketplace add 1Shot-Labs/marketplace
 /plugin install squadron-comms
 /agents
 ```

@@ -75,7 +75,7 @@ claude
 
 Then in Claude:
 ```
-/plugin marketplace add 1Shot-Labs/squadron-comms-plugin
+/plugin marketplace add 1Shot-Labs/marketplace
 ```
 
 **Step 2: Install the plugin**

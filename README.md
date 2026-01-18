@@ -45,10 +45,10 @@ sudo dnf install mpv
 
 ### 2. Installation
 
-**Option A: From GitHub (Recommended)**
+**Option A: From Marketplace (Recommended)**
 ```bash
-# Add the plugin marketplace
-/plugin marketplace add 1Shot-Labs/squadron-comms-plugin
+# Add the 1 Shot Labs marketplace
+/plugin marketplace add 1Shot-Labs/marketplace
 
 # Install the plugin
 /plugin install squadron-comms
