@@ -1,5 +1,10 @@
 # Squadron Comms Plugin
 
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/1shot-labs/squadron-comms-plugin/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-blueviolet.svg)](https://claude.ai/code)
+[![ElevenLabs](https://img.shields.io/badge/ElevenLabs-TTS-green.svg)](https://elevenlabs.io)
+
 > Voice communication system with ElevenLabs TTS for multi-agent coordination in Claude Code
 
 A Claude Code plugin that enables voice broadcasting for coordinated multi-agent operations. Spawn colored squadron agents (Red, Gold, Blue, Green) that announce their progress using distinct ElevenLabs voices while working on tasks in parallel.
