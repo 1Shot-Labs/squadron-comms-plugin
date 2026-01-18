@@ -1,0 +1,4 @@
+# Python dependencies for Squadron Comms Plugin
+
+# Cross-platform file locking for concurrent audio playback
+filelock>=3.20.0

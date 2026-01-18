@@ -44,6 +44,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Cross-platform file locking using Python `filelock` library
+- `/squadron-comms:verify-setup` command for comprehensive installation validation
+- `play_audio.py` script for Windows-compatible audio playback and logging
+- `requirements.txt` for Python dependencies
+- Windows-specific installation instructions across all documentation
+
+### Changed
+
+- File locking now uses Python instead of Unix-only `flock` command
+- All squadron agents now use Opus model instead of Sonnet
+- Improved documentation accuracy for environment variable setup
+- Added Python 3.8+ as a prerequisite
+
+### Fixed
+
+- Windows compatibility for file locking (flock doesn't exist on Windows)
+- ElevenLabs MCP package name corrected to `elevenlabs-mcp`
+- Documentation now correctly states to restart Claude Code, not terminal
+- Plugin.json validation errors resolved
+
 ### Planned
 
 - Custom voice profile configuration

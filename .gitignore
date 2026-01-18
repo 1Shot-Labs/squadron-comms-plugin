@@ -20,6 +20,11 @@ Thumbs.db
 *.swo
 *~
 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
 # Node modules (if you add any npm scripts)
 node_modules/
 

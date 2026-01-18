@@ -28,6 +28,7 @@ A Claude Code plugin that enables voice broadcasting for coordinated multi-agent
 ### 1. Prerequisites
 
 - Claude Code CLI installed
+- Python 3.8+ (for cross-platform file locking)
 - ElevenLabs API key ([get one here](https://elevenlabs.io))
 - `mpv` media player for audio playback
 
@@ -202,7 +203,35 @@ echo %ELEVENLABS_API_KEY%
 ```
 </details>
 
-### 4. Verify Installation
+### 4. Install Python Dependencies
+
+The plugin requires the `filelock` library for cross-platform file locking:
+
+```bash
+pip install filelock
+```
+
+Or install from the plugin's requirements file:
+```bash
+pip install -r ~/.claude/plugins/squadron-comms/requirements.txt
+```
+
+### 5. Verify Installation
+
+Run the setup verification command to check all requirements:
+```bash
+/squadron-comms:verify-setup
+```
+
+This will verify:
+- Environment variables are set
+- MPV is installed
+- Python and filelock are available
+- ElevenLabs API connection works
+- Squadron voice profiles are accessible
+- File permissions are correct
+
+### 6. Check Agents Loaded
 
 **Important:** After installing the plugin, you need to **restart Claude Code** for the agents to become available.
 
@@ -270,6 +299,20 @@ Example broadcast flow:
 - **Mission Complete**: "Red Leader. Analysis complete. Results ready for review."
 
 ### Commands
+
+**`/squadron-comms:verify-setup`**
+Verify that the plugin is properly configured and all requirements are met:
+```bash
+/squadron-comms:verify-setup
+```
+
+Checks:
+- Environment variables (ELEVENLABS_API_KEY)
+- MPV installation
+- Python and filelock library
+- ElevenLabs API connection
+- Squadron voice availability
+- File permissions
 
 **`/squadron-comms:mission-status`**
 Display recent voice broadcasts from the mission log:

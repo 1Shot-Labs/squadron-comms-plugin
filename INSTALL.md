@@ -22,14 +22,35 @@ Verify installation:
 claude --version
 ```
 
-### 2. ElevenLabs API Key
+### 2. Python 3.8+
+
+The plugin requires Python for cross-platform file locking.
+
+**Check if Python is installed:**
+```bash
+python3 --version
+# or on Windows:
+python --version
+```
+
+**Install Python if needed:**
+- **Windows**: Download from [python.org](https://www.python.org/downloads/)
+- **macOS**: `brew install python3` or download from python.org
+- **Linux**: Usually pre-installed, or `sudo apt install python3` (Ubuntu/Debian)
+
+**Install filelock library:**
+```bash
+pip install filelock
+```
+
+### 3. ElevenLabs API Key
 
 1. Sign up for an ElevenLabs account at [elevenlabs.io](https://elevenlabs.io)
 2. Navigate to your profile settings
 3. Generate an API key
-4. Copy the API key (you'll need it in step 3 of installation)
+4. Copy the API key (you'll need it in step 4 of installation)
 
-### 3. MPV Media Player
+### 4. MPV Media Player
 
 The plugin uses MPV to play generated audio.
 
@@ -104,7 +125,17 @@ Then in Claude:
 /plugin install squadron-comms
 ```
 
-**Step 3: Configure ElevenLabs API key**
+**Step 3: Install Python dependencies**
+```bash
+pip install filelock
+```
+
+Or install from the plugin's requirements file:
+```bash
+pip install -r ~/.claude/plugins/squadron-comms/requirements.txt
+```
+
+**Step 4: Configure ElevenLabs API key**
 
 **macOS / Linux:**
 ```bash
@@ -143,7 +174,7 @@ Or set via GUI:
 5. Click OK
 6. Restart Claude Code
 
-**Step 4: Verify installation**
+**Step 5: Verify installation**
 
 **Important:** Restart Claude Code after installing the plugin for agents to load.
 
@@ -153,7 +184,20 @@ Or set via GUI:
 claude
 ```
 
-Then in Claude:
+Run the setup verification command:
+```
+/squadron-comms:verify-setup
+```
+
+This comprehensive check will verify:
+- ELEVENLABS_API_KEY is set
+- MPV is installed and working
+- Python and filelock are available
+- ElevenLabs API connection works
+- Squadron voice profiles are accessible
+- File permissions are correct
+
+Then check agents are loaded:
 ```
 /agents
 ```

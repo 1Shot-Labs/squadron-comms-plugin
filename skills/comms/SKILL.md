@@ -67,10 +67,18 @@ mcp__elevenlabs__text_to_speech(
 )
 ```
 
-**Step 2: Play & Log (single atomic command)**
+**Step 2: Play & Log (cross-platform)**
 ```bash
-flock ${CLAUDE_PLUGIN_ROOT}/skills/comms/.audio.lock mpv --no-video --really-quiet /path/to/generated.mp3 && echo '{"timestamp":"'$(date -u +%Y-%m-%dT%H:%M:%S.000Z)'","callSign":"Red Leader","squadron":"red","message":"Red Leader here. Beginning code analysis of authentication module."}' >> ${CLAUDE_PLUGIN_ROOT}/skills/comms/mission-log.jsonl
+python3 ${CLAUDE_PLUGIN_ROOT}/skills/comms/scripts/play_audio.py \
+  "/path/to/generated.mp3" \
+  "${CLAUDE_PLUGIN_ROOT}/skills/comms/.audio.lock" \
+  "${CLAUDE_PLUGIN_ROOT}/skills/comms/mission-log.jsonl" \
+  "Red Leader" \
+  "red" \
+  "Red Leader here. Beginning code analysis of authentication module."
 ```
+
+This Python script provides cross-platform file locking (works on Windows, macOS, Linux) and handles both audio playback and mission logging atomically.
 
 ### When to Broadcast
 
@@ -100,13 +108,15 @@ Example: "Red Leader. Encountered authentication error. Investigating."
 
 ## File Locking
 
-Always use `flock` to prevent audio overlap when multiple agents broadcast simultaneously:
+The plugin uses Python's `filelock` library to prevent audio overlap when multiple agents broadcast simultaneously. This works across all platforms (Windows, macOS, Linux).
 
-```bash
-flock ${CLAUDE_PLUGIN_ROOT}/skills/comms/.audio.lock [audio command]
-```
+The `play_audio.py` script automatically handles:
+- File locking to ensure only one broadcast at a time
+- Audio playback via mpv
+- Mission log updates
+- Error handling
 
-This ensures only one agent broadcasts at a time.
+This ensures only one agent broadcasts at a time, regardless of platform.
 
 ## Mission Log Format
 
@@ -143,6 +153,11 @@ The comms skill maintains these files:
 ```
 skills/comms/
 ├── SKILL.md                    # This documentation
+├── scripts/
+│   ├── play_audio.py          # Cross-platform audio playback with locking
+│   └── broadcast.sh           # Legacy bash helper (Unix only)
+├── examples/
+│   └── broadcast-examples.md  # Usage examples
 ├── .audio/                     # Generated TTS audio files
 ├── .audio.lock                 # File lock for audio playback
 └── mission-log.jsonl          # Broadcast history
@@ -150,18 +165,29 @@ skills/comms/
 
 ## Troubleshooting
 
+**Setup verification:**
+Run `/squadron-comms:verify-setup` to check all requirements and get specific troubleshooting guidance.
+
 **Audio not playing:**
-- Ensure `mpv` is installed: `which mpv`
-- Check ElevenLabs API key is configured: `echo $ELEVENLABS_API_KEY`
+- Ensure `mpv` is installed: `which mpv` (Unix) or `where mpv` (Windows)
+- Check ElevenLabs API key is configured: `echo $ELEVENLABS_API_KEY` (Unix) or `echo %ELEVENLABS_API_KEY%` (Windows)
 - Verify audio file was generated successfully
+- On Windows: Restart Claude Code after setting environment variables
+
+**Python/filelock errors:**
+- Ensure Python 3 is installed: `python3 --version` or `python --version`
+- Install filelock: `pip install filelock` or `pip install -r ${CLAUDE_PLUGIN_ROOT}/requirements.txt`
+- The filelock library is required for cross-platform file locking
 
 **File lock errors:**
 - The lock prevents simultaneous broadcasts - this is expected behavior
 - Wait for current broadcast to complete before next one
+- If lock is stuck, remove: `${CLAUDE_PLUGIN_ROOT}/skills/comms/.audio.lock`
 
 **Mission log not updating:**
 - Check write permissions on `mission-log.jsonl`
 - Ensure `${CLAUDE_PLUGIN_ROOT}` resolves correctly
+- Verify play_audio.py script has execute permissions
 
 ## Advanced Usage
 

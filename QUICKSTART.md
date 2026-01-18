@@ -26,6 +26,11 @@ choco install mpv
 
 *Manual installation: Download from [mpv.io](https://mpv.io/installation/) and add to PATH*
 
+**Install Python dependencies:**
+```bash
+pip install filelock
+```
+
 ## 2. Get ElevenLabs API Key
 
 1. Go to [elevenlabs.io](https://elevenlabs.io)
@@ -72,8 +77,17 @@ source ~/.bashrc
 # Exit Claude Code (Ctrl+D or type 'exit')
 # Then start it again
 claude
+```
 
-# Check agents are available
+Run the setup verification command:
+```bash
+/squadron-comms:verify-setup
+```
+
+This checks all requirements and provides specific troubleshooting if anything is misconfigured.
+
+Then check agents are available:
+```bash
 /agents
 ```
 
