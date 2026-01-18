@@ -107,9 +107,9 @@ def play_audio_with_lock(audio_file: str, lock_file: str, log_file: str,
 
     try:
         with lock:
-            # Play audio with mpv
+            # Play audio with mpv (headless - no window)
             result = subprocess.run(
-                [mpv_cmd, "--no-video", "--really-quiet", str(audio_path)],
+                [mpv_cmd, "--no-video", "--no-terminal", "--really-quiet", "--no-window", str(audio_path)],
                 capture_output=True,
                 text=True
             )
