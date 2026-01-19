@@ -542,8 +542,8 @@ Solution: Check your ElevenLabs account and add credits.
 
 ### File lock issues
 
-**Broadcasts being skipped:**
-This is expected behavior when multiple agents try to broadcast simultaneously. The file lock ensures only one agent speaks at a time.
+**Broadcasts queued when multiple agents broadcasting:**
+This is expected behavior when multiple agents broadcast simultaneously. The file lock ensures only one agent speaks at a time - broadcasts are **queued (not skipped)** and play sequentially. Each agent waits up to 5 minutes for their turn. All broadcasts will eventually play unless the timeout expires.
 
 **Lock file stuck:**
 ```bash
