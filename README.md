@@ -468,11 +468,14 @@ Red Leader reporting. Analyzed 47 functions. Found 3 potential race conditions i
 Blue Leader. Critical: Memory leak detected in user session handler. Requires immediate attention.
 ```
 
-**Multi-Squadron Coordination:**
+**Multi-Squadron Coordination (via Commander):**
 ```
-Gold Leader to Blue Leader. Analysis reveals performance bottleneck in database layer.
-Blue Leader acknowledging. Will optimize database query performance.
+Gold Leader to Commander. Analysis complete. Performance bottleneck identified in database layer.
+Commander acknowledging. Deploying Blue Squadron for optimization.
+Blue Leader here. Beginning database query optimization.
 ```
+
+Note: Squadron agents report to Commander (main agent), who coordinates between them. Squadrons don't communicate directly with each other.
 
 ### Mission Log Analysis
 

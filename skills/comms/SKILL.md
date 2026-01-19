@@ -268,14 +268,18 @@ You can customize announcement style based on mission type:
 "Blue Leader. Critical: Memory leak detected in user session handler."
 ```
 
-**Coordination:**
+**Coordination (via Commander):**
 ```
-"Gold Leader to Blue Leader. Analysis complete. Performance bottlenecks identified in database layer."
+"Gold Leader to Commander. Analysis complete. Performance bottlenecks identified in database layer."
 ```
 
 ### Multi-Agent Coordination
 
-**Commander coordinating squadrons:**
+**How squadron coordination actually works:**
+
+Squadron agents are spawned independently and communicate through Commander (the main agent). They cannot directly talk to each other. All coordination flows through Commander.
+
+**Realistic coordination flow:**
 
 ```
 Commander: "Commander here. Deploying Red and Gold squadrons for codebase analysis."
@@ -283,17 +287,14 @@ Red Leader: "Red Leader here. Beginning general code review."
 Gold Leader: "Gold Leader here. Initiating security analysis."
 [Later...]
 Gold Leader: "Gold Leader to Commander. Critical vulnerability found in authentication module."
-Commander: "Commander acknowledging. Prioritizing authentication fix. Blue Squadron standing by for performance optimization."
+Commander: "Commander acknowledging. Prioritizing authentication fix. Deploying Blue Squadron for performance optimization."
+Blue Leader: "Blue Leader here. Beginning performance analysis."
 ```
 
-**Squadrons coordinating with each other:**
-
-```
-Gold Leader: "Gold Leader here. Beginning security analysis."
-[Later...]
-Gold Leader: "Gold Leader to Blue Leader. Security analysis reveals performance impact from encryption overhead."
-Blue Leader: "Blue Leader acknowledging. Will optimize encryption performance."
-```
+**Key principle:** All inter-squadron communication routes through Commander:
+- ✅ Squadron → Commander (reporting)
+- ✅ Commander → Squadron (tasking)
+- ❌ Squadron → Squadron (not possible - agents are independent)
 
 ## Integration with Squadron Agents
 

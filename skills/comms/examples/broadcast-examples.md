@@ -120,17 +120,24 @@ python "$BROADCAST_SCRIPT" \
 
 ### Example 5: Multi-Squadron Coordination
 
-**Scenario:** Gold Squadron alerts Blue Squadron about performance issues
+**Scenario:** Gold Squadron reports findings to Commander, who tasks Blue Squadron
 
 **Gold Leader Broadcast:**
 ```
-Gold Leader to Blue Leader. Security analysis reveals performance impact from encryption overhead.
+Gold Leader to Commander. Security analysis complete. Performance impact from encryption overhead identified.
 ```
 
-**Blue Leader Response:**
+**Commander Response (main agent):**
 ```
-Blue Leader acknowledging. Will optimize encryption performance.
+Commander acknowledging. Deploying Blue Squadron for encryption optimization.
 ```
+
+**Blue Leader Broadcast:**
+```
+Blue Leader here. Beginning encryption performance optimization.
+```
+
+**Note:** Squadron agents communicate through Commander (the main agent), not directly with each other.
 
 ### Example 6: Commander Broadcast
 
@@ -233,9 +240,9 @@ Blue Leader. Critical: Memory leak detected in user session handler. Requires im
    - Good: "Blue Leader reporting. Reduced database query time from 450ms to 80ms."
    - Poor: "It's faster now."
 
-4. **Coordinate Properly**: Reference other squadrons when relevant
-   - Good: "Gold Leader to Blue Leader. Analysis complete."
-   - Poor: "Sending you the results."
+4. **Coordinate Properly**: Report to Commander, not other squadrons
+   - Good: "Gold Leader to Commander. Analysis complete."
+   - Poor: "Gold Leader to Blue Leader. Analysis complete." (squadrons can't talk directly)
 
 5. **Appropriate Frequency**: Broadcast at milestones, not continuously
    - Good: Start, major milestones, completion
