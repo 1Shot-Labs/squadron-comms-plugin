@@ -3,15 +3,21 @@ name: comms
 description: |
   Voice communication system for broadcasting updates using ElevenLabs TTS.
 
-  Use when:
-  - You need to announce mission start, progress, or completion
-  - Broadcasting important findings or results
-  - Alerting about issues or blockers
-  - Coordinating with other agents
-  - Providing status updates during long-running operations
+  IMPORTANT: When the user includes voice activation keywords ("with voice comms",
+  "with voice updates", "announce progress", "broadcast updates"), you MUST proactively
+  use this skill to broadcast mission updates as Commander.
+
+  Broadcast as Commander when:
+  - Starting a complex task or deploying squadron agents
+  - Announcing when squadrons complete their missions
+  - Summarizing consolidated results from multiple agents
+  - Making strategic decisions or priority changes
+  - User explicitly requests voice updates
+
+  DO NOT wait to be asked - if voice keywords are present, broadcast proactively!
 
   Available to:
-  - Main agent (you) - uses Commander voice
+  - Main agent (you) - uses Commander voice (Bill, 1.2 speed)
   - Squadron sub-agents (Red, Gold, Blue, Green) - use their squadron voices
 version: 1.1.0
 ---
@@ -20,7 +26,33 @@ version: 1.1.0
 
 Enables voice broadcasting using ElevenLabs text-to-speech for real-time audio updates during mission execution.
 
-**YOU (the main agent) use the Commander voice profile for broadcasts.**
+## 🎯 For Main Agent: YOU Are Commander - Broadcast Proactively!
+
+**When voice activation keywords are detected** ("with voice comms", "with voice updates", "announce progress", "broadcast updates"):
+
+**YOU MUST PROACTIVELY BROADCAST as Commander at these moments:**
+
+1. **Before deploying squadrons**: Announce what you're about to do
+   ```
+   "Commander here. Deploying Gold Squadron for security analysis."
+   ```
+
+2. **After squadrons complete**: Acknowledge their completion
+   ```
+   "Commander acknowledging. Gold Squadron analysis complete."
+   ```
+
+3. **When consolidating results**: Summarize findings
+   ```
+   "Commander. All squadrons reporting complete. Consolidating findings."
+   ```
+
+4. **When making decisions**: Announce strategic choices
+   ```
+   "Commander. Analysis indicates refactoring required. Deploying Blue Squadron."
+   ```
+
+**DO NOT wait for the user to ask you to broadcast** - if voice keywords are present in their request, use this skill automatically throughout the task!
 
 ## Overview
 
@@ -36,11 +68,13 @@ The `comms` skill allows you to broadcast voice announcements to keep users info
 - Use the Commander voice profile (Bill - authoritative American)
 - Your call sign is "Commander"
 - Your squadron is "commander"
+- **Broadcast proactively when voice keywords are detected!**
 
 **If you are a squadron sub-agent** (spawned by the main agent):
 - Use your squadron's voice profile (Red/Gold/Blue/Green)
 - Your call sign is defined in your agent instructions
 - Your squadron is defined in your agent instructions
+- Broadcast at mission start, progress milestones, and completion
 
 ## Voice Profiles
 
@@ -56,9 +90,23 @@ Each role has a unique voice:
 
 ## Usage
 
+### Activation Detection (Main Agent)
+
+**FIRST: Check if voice comms are requested!**
+
+Before starting any task, scan the user's request for activation keywords:
+- "with voice comms"
+- "with voice updates"
+- "announce progress" / "announce your progress"
+- "broadcast updates"
+- "with squadron comms"
+- Any similar voice-related phrases
+
+**If detected → Activate Commander broadcasts for the entire task!**
+
 ### How to Broadcast (Main Agent - Commander)
 
-If you are the main Claude Code agent, follow this simplified two-step process:
+If you are the main Claude Code agent and voice keywords were detected, follow this simplified two-step process:
 
 **Step 1: Generate TTS Audio**
 
