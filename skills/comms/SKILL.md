@@ -10,24 +10,41 @@ description: |
   - Coordinating with other agents
   - Providing status updates during long-running operations
 
-  This skill is automatically available to all squadron agents (Red, Gold, Blue, Green).
-version: 1.0.0
+  Available to:
+  - Main agent (you) - uses Commander voice
+  - Squadron sub-agents (Red, Gold, Blue, Green) - use their squadron voices
+version: 1.1.0
 ---
 
 # Voice Communications Skill
 
 Enables voice broadcasting using ElevenLabs text-to-speech for real-time audio updates during mission execution.
 
+**YOU (the main agent) use the Commander voice profile for broadcasts.**
+
 ## Overview
 
 The `comms` skill allows you to broadcast voice announcements to keep users informed of your progress. All broadcasts are:
 - Converted to speech using ElevenLabs TTS
-- Played through system audio using the ElevenLabs MCP play_audio tool
+- Played through system audio with file locking (prevents overlaps)
 - Logged to a mission log file (JSONL format)
 
-## Squadron Voice Profiles
+## Who Are You?
 
-Each squadron has a unique voice:
+**If you are the main Claude Code agent** (interacting directly with the user):
+- **You are Commander**
+- Use the Commander voice profile (Bill - authoritative American)
+- Your call sign is "Commander"
+- Your squadron is "commander"
+
+**If you are a squadron sub-agent** (spawned by the main agent):
+- Use your squadron's voice profile (Red/Gold/Blue/Green)
+- Your call sign is defined in your agent instructions
+- Your squadron is defined in your agent instructions
+
+## Voice Profiles
+
+Each role has a unique voice:
 
 | Squadron | Call Sign | Voice | Voice ID | Speed |
 |----------|-----------|-------|----------|-------|
@@ -39,72 +56,107 @@ Each squadron has a unique voice:
 
 ## Usage
 
-### Basic Broadcasting
+### How to Broadcast (Main Agent - Commander)
 
-To broadcast a voice message, follow these three steps:
-
-1. **Generate TTS Audio**: Use ElevenLabs to convert your message to speech
-2. **Play Audio**: Use the ElevenLabs MCP play_audio tool
-3. **Log Broadcast**: Append to mission log for history
-
-### Example: Red Squadron Broadcast
+If you are the main Claude Code agent, follow this simplified two-step process:
 
 **Step 1: Generate TTS Audio**
+
+Use the ElevenLabs MCP tool with Commander's voice profile:
+
 ```
 mcp__elevenlabs__text_to_speech(
-  text="Red Leader here. Beginning code analysis of authentication module.",
-  voice_id="onwK4e9ZLuTAKqWW03F9",
-  speed=1.1,
-  output_directory="${CLAUDE_PLUGIN_ROOT}/skills/comms/.audio"
+  text="Commander here. Initiating parallel analysis across all squadrons.",
+  voice_id="pqHfZKP75CvOlQylNhV4",
+  speed=1.2
 )
 ```
 
-The tool will return the path to the generated audio file (e.g., `/path/to/.audio/tts_Red_L_20250118_123456.mp3`).
+This returns the audio file path. Save this path for Step 2.
 
-**Step 2: Play Audio**
+**Step 2: Broadcast with Auto-Logging**
 
-Use the ElevenLabs MCP play_audio tool with the file path from Step 1:
-
-```
-mcp__elevenlabs__play_audio(
-  input_file_path="/path/to/.audio/tts_Red_L_20250118_123456.mp3"
-)
-```
-
-**Step 3: Log Broadcast**
-
-After playback, log the broadcast to the mission log:
+Use the self-locating broadcast wrapper. First, locate the script:
 
 ```bash
-bash ${CLAUDE_PLUGIN_ROOT}/skills/comms/scripts/log_broadcast.sh \
-  "Red Leader" \
-  "red" \
-  "Red Leader here. Beginning code analysis of authentication module."
+BROADCAST_SCRIPT=$(find ~/.claude/plugins -name "broadcast.py" -path "*/squadron-comms*/skills/comms/scripts/*" 2>/dev/null | head -1)
 ```
 
-This creates a JSONL entry with timestamp, call sign, squadron, and message.
+Then broadcast using the located script:
+
+```bash
+python "$BROADCAST_SCRIPT" \
+  "<audio_file_path_from_step_1>" \
+  "Commander" \
+  "commander" \
+  "Commander here. Initiating parallel analysis across all squadrons."
+```
+
+The broadcast script automatically:
+- Locates plugin directories using its own path (no env vars!)
+- Plays audio with file locking (prevents overlaps with squadron broadcasts)
+- Logs broadcast to mission-log.jsonl
+
+**You can combine both commands:**
+
+```bash
+BROADCAST_SCRIPT=$(find ~/.claude/plugins -name "broadcast.py" -path "*/squadron-comms*/skills/comms/scripts/*" 2>/dev/null | head -1) && \
+python "$BROADCAST_SCRIPT" \
+  "/path/to/audio.mp3" \
+  "Commander" \
+  "commander" \
+  "Your message here"
+```
+
+### How to Broadcast (Squadron Sub-Agents)
+
+If you are a squadron sub-agent, use your squadron's voice profile. Refer to your agent-specific instructions for your voice ID, call sign, and squadron name.
 
 ### When to Broadcast
 
-**Mission Start:**
+**Commander Examples (Main Agent):**
+
+Coordinating multiple squadrons:
+```
+"Commander here. Launching three squadrons for parallel analysis."
+```
+
+High-level status:
+```
+"Commander reporting. All squadrons deployed. Awaiting initial reports."
+```
+
+Mission summary:
+```
+"Commander. Mission complete. All squadron objectives achieved. Consolidated findings ready."
+```
+
+Strategic decisions:
+```
+"Commander. Analysis indicates refactoring required. Deploying Gold Squadron for impact assessment."
+```
+
+**Squadron Examples (Sub-Agents):**
+
+Mission Start:
 ```
 "[Call Sign] here. [Brief description of mission]"
 Example: "Gold Leader here. Initiating deep analysis of payment processing flow."
 ```
 
-**Progress Updates:**
+Progress Updates:
 ```
 "[Call Sign] reporting. [Progress description]"
 Example: "Blue Leader reporting. Reduced query time from 450ms to 80ms."
 ```
 
-**Mission Complete:**
+Mission Complete:
 ```
 "[Call Sign]. Mission complete. [Summary of results]"
 Example: "Green Leader. Mission complete. All accessibility issues resolved."
 ```
 
-**Issues/Blockers:**
+Issues/Blockers:
 ```
 "[Call Sign]. [Issue description]"
 Example: "Red Leader. Encountered authentication error. Investigating."
@@ -217,14 +269,19 @@ You can customize announcement style based on mission type:
 
 ### Multi-Agent Coordination
 
-When multiple squadrons work together, coordinate broadcasts:
+**Commander coordinating squadrons:**
 
-1. Announce your mission start
-2. Reference other squadrons when relevant
-3. Share findings that may impact other missions
-4. Coordinate completion announcements
+```
+Commander: "Commander here. Deploying Red and Gold squadrons for codebase analysis."
+Red Leader: "Red Leader here. Beginning general code review."
+Gold Leader: "Gold Leader here. Initiating security analysis."
+[Later...]
+Gold Leader: "Gold Leader to Commander. Critical vulnerability found in authentication module."
+Commander: "Commander acknowledging. Prioritizing authentication fix. Blue Squadron standing by for performance optimization."
+```
 
-**Example:**
+**Squadrons coordinating with each other:**
+
 ```
 Gold Leader: "Gold Leader here. Beginning security analysis."
 [Later...]
@@ -234,9 +291,11 @@ Blue Leader: "Blue Leader acknowledging. Will optimize encryption performance."
 
 ## Integration with Squadron Agents
 
-All squadron agents automatically have access to this skill. When you spawn an agent using the Task tool, they will use their squadron's voice profile for all broadcasts.
+**You (the main agent) automatically have Commander access** - just use the skill!
 
-Simply include the agent's call sign in their prompt:
+Squadron sub-agents automatically have access to this skill with their squadron voice profiles. When you spawn an agent using the Task tool, they will use their squadron's voice profile for all broadcasts.
+
+Example:
 
 ```
 Task tool with subagent_type="red-agent":
@@ -244,3 +303,29 @@ Task tool with subagent_type="red-agent":
 ```
 
 The agent will automatically broadcast using Red Squadron's voice (Daniel, British).
+
+## Typical Workflow
+
+**As Commander (main agent), you orchestrate:**
+
+1. **Mission Start**: Announce what you're about to do
+   ```
+   "Commander here. Initiating parallel refactoring analysis across authentication and payment modules."
+   ```
+
+2. **Deploy Squadrons**: Launch sub-agents, they announce their missions
+   ```
+   Red Leader: "Red Leader here. Beginning authentication module analysis."
+   Gold Leader: "Gold Leader here. Analyzing payment processing security."
+   ```
+
+3. **Monitor Progress**: Squadrons report milestones
+   ```
+   Red Leader: "Red Leader reporting. Found 3 deprecated authentication patterns."
+   Gold Leader: "Gold Leader reporting. Identified PCI compliance gaps."
+   ```
+
+4. **Consolidate**: Summarize results
+   ```
+   Commander: "Commander. Both squadrons reporting complete. Consolidating findings and preparing recommendations."
+   ```
