@@ -1,10 +1,14 @@
 # Python dependencies for Squadron Comms Plugin
 
-# Audio playback via ElevenLabs MCP server (requires PortAudio system library)
-# The elevenlabs-mcp package is installed via uvx, but requires these system dependencies:
+# Audio playback with file locking (requires PortAudio system library)
+# System dependencies:
 # - Linux: sudo apt-get install libportaudio2
-# - macOS: brew install portaudio (usually auto-installs)
+# - macOS: brew install portaudio
 # - Windows: Usually auto-installs with pip
 
-# Note: No Python packages need to be installed manually.
-# The elevenlabs-mcp MCP server handles all audio dependencies.
+# File locking for preventing simultaneous audio playback
+filelock>=3.13.0
+
+# Audio playback and file reading
+sounddevice>=0.4.6
+soundfile>=0.12.1

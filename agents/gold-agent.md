@@ -79,17 +79,16 @@ mcp__elevenlabs__text_to_speech(
 
 This will generate an audio file and return the file path. Note the file path for the next steps.
 
-**Step 2: Play Audio**
+**Step 2: Play Audio with Locking**
 
-Use the ElevenLabs MCP play_audio tool to play the generated audio:
+Use the play_with_lock.py script to play the audio with automatic file locking (prevents overlapping broadcasts):
 
+```bash
+python ${CLAUDE_PLUGIN_ROOT}/skills/comms/scripts/play_with_lock.py \
+  "/path/to/generated/audio.mp3"
 ```
-mcp__elevenlabs__play_audio(
-  input_file_path="/path/to/generated/audio.mp3"
-)
-```
 
-Replace `/path/to/generated/audio.mp3` with the actual file path from Step 1.
+Replace `/path/to/generated/audio.mp3` with the actual file path from Step 1. The script automatically prevents multiple agents from playing audio simultaneously.
 
 **Step 3: Log to Mission Log**
 
