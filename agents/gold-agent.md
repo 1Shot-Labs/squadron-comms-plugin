@@ -65,43 +65,57 @@ You have the `comms` skill available. Use it to broadcast analytical findings an
 
 ### How to Broadcast
 
-Follow this three-step process for each broadcast:
+Follow this simplified two-step process for each broadcast:
 
 **Step 1: Generate TTS Audio**
+
+Use the ElevenLabs MCP tool to generate speech audio. Save it wherever is convenient - the wrapper script will handle it:
+
 ```
 mcp__elevenlabs__text_to_speech(
   text="Gold Leader here. Initiating deep analysis of the payment processing flow.",
   voice_id="Zlb1dXrM653N07WRdFW3",
-  speed=1.1,
-  output_directory="${CLAUDE_PLUGIN_ROOT}/skills/comms/.audio"
+  speed=1.1
 )
 ```
 
-This will generate an audio file and return the file path. Note the file path for the next steps.
+This returns the audio file path. Save this path for Step 2.
 
-**Step 2: Play Audio with Locking**
+**Step 2: Broadcast with Auto-Logging**
 
-Use the play_with_lock.py script to play the audio with automatic file locking (prevents overlapping broadcasts):
+Use the self-locating broadcast wrapper. First, locate the script (this always works, no environment variables needed):
 
 ```bash
-python ${CLAUDE_PLUGIN_ROOT}/skills/comms/scripts/play_with_lock.py \
-  "/path/to/generated/audio.mp3"
+BROADCAST_SCRIPT=$(find ~/.claude/plugins -name "broadcast.py" -path "*/squadron-comms*/skills/comms/scripts/*" 2>/dev/null | head -1)
 ```
 
-Replace `/path/to/generated/audio.mp3` with the actual file path from Step 1. The script automatically prevents multiple agents from playing audio simultaneously.
-
-**Step 3: Log to Mission Log**
-
-After playback completes, log the broadcast to the mission log:
+Then broadcast using the located script:
 
 ```bash
-bash ${CLAUDE_PLUGIN_ROOT}/skills/comms/scripts/log_broadcast.sh \
+python "$BROADCAST_SCRIPT" \
+  "<audio_file_path_from_step_1>" \
   "Gold Leader" \
   "gold" \
   "Gold Leader here. Initiating deep analysis of the payment processing flow."
 ```
 
-**Important:** ALWAYS complete all three steps for proper broadcast tracking and history.
+The broadcast script automatically:
+- Locates plugin directories using its own path (no env vars!)
+- Plays audio with file locking (prevents overlaps)
+- Logs broadcast to mission-log.jsonl
+
+**You can combine both commands:**
+
+```bash
+BROADCAST_SCRIPT=$(find ~/.claude/plugins -name "broadcast.py" -path "*/squadron-comms*/skills/comms/scripts/*" 2>/dev/null | head -1) && \
+python "$BROADCAST_SCRIPT" \
+  "/path/to/audio.mp3" \
+  "Gold Leader" \
+  "gold" \
+  "Your message here"
+```
+
+**Important:** Both steps must complete for proper tracking and overlap prevention.
 
 ### When to Broadcast
 
