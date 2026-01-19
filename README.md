@@ -23,6 +23,26 @@ A Claude Code plugin that enables voice broadcasting for coordinated multi-agent
 - **🎨 Color-Coded**: Visual squadron identification in Claude Code
 - **📡 Commander Role**: Main agent can coordinate squadrons
 
+## How It Works
+
+The Squadron Comms Plugin uses a two-component audio architecture:
+
+1. **TTS Generation (ElevenLabs)**: The ElevenLabs MCP server generates speech audio from text
+   - Converts messages to MP3 files with squadron-specific voices
+   - Handles voice synthesis, speed adjustment, and audio encoding
+
+2. **Audio Playback (sounddevice + PortAudio)**: Python sounddevice library plays the generated audio
+   - Cross-platform audio playback via PortAudio
+   - File locking prevents simultaneous broadcasts from overlapping
+   - Automatic mission logging to JSONL format
+
+**The complete broadcast flow:**
+```
+Text → ElevenLabs TTS → MP3 file → broadcast.py → play_with_lock.py → Audio output + Log entry
+```
+
+This hybrid approach provides the best of both worlds: high-quality ElevenLabs voices with reliable cross-platform playback.
+
 ## Quick Start
 
 ### 1. Prerequisites
@@ -473,10 +493,16 @@ grep $(date -u +%Y-%m-%d) ${CLAUDE_PLUGIN_ROOT}/skills/comms/mission-log.jsonl
 
 ### Audio not playing
 
-**Check mpv installation:**
+**Check PortAudio installation:**
 ```bash
-which mpv
-# Should output: /usr/bin/mpv or /usr/local/bin/mpv
+# Linux
+dpkg -l | grep libportaudio2
+
+# macOS
+brew list portaudio
+
+# Test Python audio libraries
+python -c "import sounddevice as sd; print('sounddevice OK'); print(f'{len(sd.query_devices())} audio devices found')"
 ```
 
 **Check ElevenLabs API key:**
@@ -485,10 +511,10 @@ echo $ELEVENLABS_API_KEY
 # Should output your API key
 ```
 
-**Test mpv:**
+**Test audio playback:**
 ```bash
-# Download a test file and play it
-mpv --no-video https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3
+# Test that sounddevice can play audio
+python -c "import sounddevice as sd; import numpy as np; sd.play(np.zeros(44100), 44100); sd.wait(); print('Audio test complete')"
 ```
 
 ### ElevenLabs API errors
@@ -550,11 +576,15 @@ squadron-comms-plugin/
 │   └── green-agent.md        # Green Squadron agent
 ├── skills/
 │   └── comms/
-│       ├── SKILL.md          # Comms skill documentation
+│       ├── SKILL.md                  # Comms skill documentation
 │       ├── scripts/
-│       │   └── broadcast.sh  # Broadcast helper script
-│       └── examples/
-│           └── broadcast-examples.md
+│       │   ├── broadcast.py          # Self-locating broadcast wrapper
+│       │   ├── play_with_lock.py     # Audio playback with file locking
+│       │   └── log_broadcast.sh      # Mission log appender
+│       ├── examples/
+│       │   └── broadcast-examples.md
+│       ├── .audio/                   # Generated TTS audio files
+│       └── mission-log.jsonl         # Broadcast history
 ├── commands/
 │   └── mission-status.md     # Mission status command
 ├── .mcp.json                 # ElevenLabs MCP server config
@@ -598,7 +628,10 @@ claude --plugin-dir ./squadron-comms-plugin
 
 - **ElevenLabs**: TTS voice generation
 - **Claude Code**: Plugin platform
-- **MPV**: Audio playback
+- **PortAudio**: Cross-platform audio I/O library
+- **sounddevice**: Python audio playback
+- **soundfile**: Audio file reading
+- **filelock**: Cross-platform file locking
 
 ## License
 

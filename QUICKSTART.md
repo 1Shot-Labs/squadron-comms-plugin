@@ -141,11 +141,14 @@ Make sure our app meets WCAG AA standards. Use voice comms to keep me updated.
 
 **No audio?**
 ```bash
-# Test MPV
-mpv https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3
+# Test Python audio libraries
+python -c "import sounddevice as sd; print('sounddevice OK'); print(f'{len(sd.query_devices())} audio devices')"
 
 # Check API key
 echo $ELEVENLABS_API_KEY
+
+# Test audio playback
+python -c "import sounddevice as sd; import numpy as np; sd.play(np.zeros(44100), 44100); sd.wait(); print('Audio test complete')"
 ```
 
 **Agents not showing?**

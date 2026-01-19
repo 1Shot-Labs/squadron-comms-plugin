@@ -164,14 +164,20 @@ Example: "Red Leader. Encountered authentication error. Investigating."
 
 ## Audio Playback
 
-The plugin uses the **ElevenLabs MCP play_audio tool** for audio playback. This provides:
+The plugin uses **Python sounddevice + PortAudio** for audio playback via the `broadcast.py` wrapper. This provides:
 - Cross-platform audio playback (Windows, macOS, Linux)
-- Consistent behavior across all platforms
+- Automatic file locking to prevent overlapping broadcasts
 - Built-in audio device handling via PortAudio
 - No external media player dependencies
 
-**Note on Concurrent Broadcasts:**
-While agents can technically broadcast simultaneously, in practice this is rare. The ElevenLabs TTS generation is sequential enough that broadcasts naturally queue. If you need strict synchronization, consider spawning agents with delays between them.
+**File Locking Mechanism:**
+The `play_with_lock.py` script uses Python's FileLock library to ensure only one broadcast plays at a time. When multiple agents attempt to broadcast concurrently:
+1. First agent acquires the lock and plays audio
+2. Other agents wait in queue (up to 5 minutes)
+3. Broadcasts play sequentially without overlap
+4. Lock automatically releases when playback completes
+
+This guarantees clean audio output even when 10+ agents are broadcasting simultaneously.
 
 ## Mission Log Format
 

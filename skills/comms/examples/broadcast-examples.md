@@ -14,19 +14,22 @@ Red Leader here. Beginning code analysis of authentication module.
 ```
 
 **Implementation:**
-```
-1. Generate TTS:
-   mcp__elevenlabs__text_to_speech(
-     text="Red Leader here. Beginning code analysis of authentication module.",
-     voice_id="onwK4e9ZLuTAKqWW03F9",
-     speed=1.1
-   )
+```bash
+# Step 1: Generate TTS audio
+mcp__elevenlabs__text_to_speech(
+  text="Red Leader here. Beginning code analysis of authentication module.",
+  voice_id="onwK4e9ZLuTAKqWW03F9",
+  speed=1.1
+)
+# Returns: /path/to/generated/audio.mp3
 
-2. Play & Log:
-   flock ${CLAUDE_PLUGIN_ROOT}/skills/comms/.audio.lock \
-     mpv --no-video --really-quiet /path/to/audio.mp3 && \
-     echo '{"timestamp":"'$(date -u +%Y-%m-%dT%H:%M:%S.000Z)'","callSign":"Red Leader","squadron":"red","message":"Red Leader here. Beginning code analysis of authentication module."}' >> \
-     ${CLAUDE_PLUGIN_ROOT}/skills/comms/mission-log.jsonl
+# Step 2: Broadcast with auto-locking and logging
+BROADCAST_SCRIPT=$(find ~/.claude/plugins -name "broadcast.py" -path "*/squadron-comms*/skills/comms/scripts/*" 2>/dev/null | head -1)
+python "$BROADCAST_SCRIPT" \
+  "/path/to/generated/audio.mp3" \
+  "Red Leader" \
+  "red" \
+  "Red Leader here. Beginning code analysis of authentication module."
 ```
 
 ### Example 2: Gold Squadron Progress Update
@@ -39,16 +42,22 @@ Gold Leader reporting. Discovered critical dependency on legacy API in authentic
 ```
 
 **Implementation:**
-```
-1. Generate TTS:
-   mcp__elevenlabs__text_to_speech(
-     text="Gold Leader reporting. Discovered critical dependency on legacy API in authentication module.",
-     voice_id="Zlb1dXrM653N07WRdFW3",
-     speed=1.1
-   )
+```bash
+# Step 1: Generate TTS audio
+mcp__elevenlabs__text_to_speech(
+  text="Gold Leader reporting. Discovered critical dependency on legacy API in authentication module.",
+  voice_id="Zlb1dXrM653N07WRdFW3",
+  speed=1.1
+)
+# Returns: /path/to/generated/audio.mp3
 
-2. Play & Log:
-   [Same pattern as Example 1, using Gold's voice ID and call sign]
+# Step 2: Broadcast with auto-locking and logging
+BROADCAST_SCRIPT=$(find ~/.claude/plugins -name "broadcast.py" -path "*/squadron-comms*/skills/comms/scripts/*" 2>/dev/null | head -1)
+python "$BROADCAST_SCRIPT" \
+  "/path/to/generated/audio.mp3" \
+  "Gold Leader" \
+  "gold" \
+  "Gold Leader reporting. Discovered critical dependency on legacy API in authentication module."
 ```
 
 ### Example 3: Blue Squadron Completion
@@ -61,16 +70,22 @@ Blue Leader. Optimization complete. Achieved 65% reduction in bundle size.
 ```
 
 **Implementation:**
-```
-1. Generate TTS:
-   mcp__elevenlabs__text_to_speech(
-     text="Blue Leader. Optimization complete. Achieved 65 percent reduction in bundle size.",
-     voice_id="bVMeCyTHy58xNoL34h3p",
-     speed=1.1
-   )
+```bash
+# Step 1: Generate TTS audio
+mcp__elevenlabs__text_to_speech(
+  text="Blue Leader. Optimization complete. Achieved 65 percent reduction in bundle size.",
+  voice_id="bVMeCyTHy58xNoL34h3p",
+  speed=1.1
+)
+# Returns: /path/to/generated/audio.mp3
 
-2. Play & Log:
-   [Same pattern, using Blue's voice ID and call sign]
+# Step 2: Broadcast with auto-locking and logging
+BROADCAST_SCRIPT=$(find ~/.claude/plugins -name "broadcast.py" -path "*/squadron-comms*/skills/comms/scripts/*" 2>/dev/null | head -1)
+python "$BROADCAST_SCRIPT" \
+  "/path/to/generated/audio.mp3" \
+  "Blue Leader" \
+  "blue" \
+  "Blue Leader. Optimization complete. Achieved 65 percent reduction in bundle size."
 ```
 
 ### Example 4: Green Squadron Alert
@@ -83,16 +98,22 @@ Green Leader. Identified 12 accessibility issues. Beginning remediation.
 ```
 
 **Implementation:**
-```
-1. Generate TTS:
-   mcp__elevenlabs__text_to_speech(
-     text="Green Leader. Identified 12 accessibility issues. Beginning remediation.",
-     voice_id="XrExE9yKIg1WjnnlVkGX",
-     speed=1.1
-   )
+```bash
+# Step 1: Generate TTS audio
+mcp__elevenlabs__text_to_speech(
+  text="Green Leader. Identified 12 accessibility issues. Beginning remediation.",
+  voice_id="XrExE9yKIg1WjnnlVkGX",
+  speed=1.1
+)
+# Returns: /path/to/generated/audio.mp3
 
-2. Play & Log:
-   [Same pattern, using Green's voice ID and call sign]
+# Step 2: Broadcast with auto-locking and logging
+BROADCAST_SCRIPT=$(find ~/.claude/plugins -name "broadcast.py" -path "*/squadron-comms*/skills/comms/scripts/*" 2>/dev/null | head -1)
+python "$BROADCAST_SCRIPT" \
+  "/path/to/generated/audio.mp3" \
+  "Green Leader" \
+  "green" \
+  "Green Leader. Identified 12 accessibility issues. Beginning remediation."
 ```
 
 ## Advanced Examples
@@ -121,16 +142,22 @@ Commander here. Deploying Red and Gold squadrons for parallel analysis. Blue and
 ```
 
 **Implementation:**
-```
-1. Generate TTS:
-   mcp__elevenlabs__text_to_speech(
-     text="Commander here. Deploying Red and Gold squadrons for parallel analysis. Blue and Green on standby.",
-     voice_id="pqHfZKP75CvOlQylNhV4",
-     speed=1.2
-   )
+```bash
+# Step 1: Generate TTS audio
+mcp__elevenlabs__text_to_speech(
+  text="Commander here. Deploying Red and Gold squadrons for parallel analysis. Blue and Green on standby.",
+  voice_id="pqHfZKP75CvOlQylNhV4",
+  speed=1.2
+)
+# Returns: /path/to/generated/audio.mp3
 
-2. Play & Log:
-   [Same pattern, using Commander's voice ID and call sign]
+# Step 2: Broadcast with auto-locking and logging
+BROADCAST_SCRIPT=$(find ~/.claude/plugins -name "broadcast.py" -path "*/squadron-comms*/skills/comms/scripts/*" 2>/dev/null | head -1)
+python "$BROADCAST_SCRIPT" \
+  "/path/to/generated/audio.mp3" \
+  "Commander" \
+  "commander" \
+  "Commander here. Deploying Red and Gold squadrons for parallel analysis. Blue and Green on standby."
 ```
 
 ### Example 7: Detailed Progress Report

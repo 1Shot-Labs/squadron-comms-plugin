@@ -360,38 +360,64 @@ export ELEVENLABS_API_KEY="your_key_here"
 echo $ELEVENLABS_API_KEY
 ```
 
-### Issue: "mpv: command not found"
+### Issue: "No module named 'sounddevice'" or audio errors
 
-**Cause:** MPV not installed or not in PATH.
+**Cause:** Python audio libraries not installed or PortAudio missing.
 
 **Solution:**
+
+1. **Install Python dependencies:**
 ```bash
-# Check if installed
-which mpv
+pip install -r requirements.txt
+```
 
-# If not found, install (see Prerequisites section)
+2. **Install PortAudio system library:**
 
-# macOS
-brew install mpv
+**macOS:**
+```bash
+brew install portaudio
+```
 
-# Linux
-sudo apt install mpv  # Ubuntu/Debian
+**Linux (Ubuntu/Debian):**
+```bash
+sudo apt-get install libportaudio2 portaudio19-dev
+```
+
+**Linux (Fedora/RHEL):**
+```bash
+sudo dnf install portaudio portaudio-devel
+```
+
+**Windows:**
+PortAudio usually installs automatically. If issues persist:
+```powershell
+pip install --force-reinstall sounddevice soundfile
+```
+
+3. **Verify installation:**
+```bash
+python -c "import sounddevice as sd; print('sounddevice OK'); print(f'{len(sd.query_devices())} audio devices')"
 ```
 
 ### Issue: "No audio output"
 
-**Cause:** MPV configuration or audio device issues.
+**Cause:** Audio device configuration or PortAudio issues.
 
 **Solution:**
+
 ```bash
-# Test MPV directly
-mpv https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3
+# List available audio devices
+python -c "import sounddevice as sd; print(sd.query_devices())"
 
-# Check audio devices
-mpv --audio-device=help
+# Test audio playback
+python -c "import sounddevice as sd; import numpy as np; sd.play(np.zeros(44100), 44100); sd.wait(); print('Test complete')"
 
-# Try specifying device
-mpv --audio-device=alsa/default [audio_file]
+# Check PortAudio installation
+# Linux:
+ldconfig -p | grep portaudio
+
+# macOS:
+brew list portaudio
 ```
 
 ### Issue: "Rate limit exceeded"

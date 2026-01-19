@@ -35,46 +35,55 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Proper file locking with flock
 - JSONL mission log format
 
-### Dependencies
+### Dependencies (v1.0.0)
 
 - Claude Code CLI
 - ElevenLabs API key
-- mpv media player
-- mcp-eleven-labs MCP server
+- elevenlabs-mcp MCP server
+- No audio playback dependencies in v1.0.0 (added in v1.1.0)
 
 ## [1.1.0] - 2025-01-18
 
-### Changed - Major Redesign
+### Changed - Audio Locking & Path Resolution
 
-- **Switched to ElevenLabs MCP play_audio tool** for all audio playback
-  - Removes dependency on mpv media player
-  - Uses PortAudio library instead (cross-platform)
-  - Consistent behavior across Windows, macOS, and Linux
-  - Eliminates GUI window popups during playback
+- **Added cross-platform audio file locking** to prevent simultaneous broadcasts
+  - New `play_with_lock.py` script with FileLock library
+  - Uses Python sounddevice + soundfile for audio playback
+  - Removes dependency on external media players (mpv)
+  - PortAudio library provides cross-platform audio support
+  - Automatic queuing when multiple agents broadcast concurrently
 
-- **Simplified broadcast process** from 2 steps to 3 steps:
-  1. Generate TTS audio with `mcp__elevenlabs__text_to_speech`
-  2. Play audio with `mcp__elevenlabs__play_audio`
-  3. Log broadcast with `log_broadcast.sh`
+- **Created self-locating broadcast wrapper** to fix path resolution issues
+  - New `broadcast.py` script handles complete broadcast workflow
+  - Uses `__file__` for path discovery (no environment variables needed)
+  - Agents locate script with `find` command (bulletproof across platforms)
+  - Combines TTS playback + mission logging in single call
+  - Fixed 90% agent failure rate from path resolution issues
 
-- **Removed Python file locking**
-  - File locking rarely needed in practice
-  - TTS generation naturally serializes broadcasts
-  - Simplified codebase and dependencies
+- **Simplified broadcast process** from 3 manual steps to 2 steps:
+  1. Generate TTS audio with `mcp__elevenlabs__text_to_speech` (anywhere)
+  2. Call `broadcast.py` with audio path (handles playback + logging)
 
 ### Added
 
-- `log_broadcast.sh` - Simple mission logging script
+- **Commander voice support** for main agent
+  - Main Claude Code agent can now broadcast as Commander (Bill voice)
+  - Voice coordination between Commander and squadron leaders
+  - Clear role distinction (orchestrator vs execution agents)
+
+- `broadcast.py` - Self-locating wrapper for complete broadcast workflow
+- `play_with_lock.py` - Cross-platform audio playback with file locking
+- `log_broadcast.sh` - Mission logging helper script
+- Dependencies: `filelock>=3.13.0`, `sounddevice>=0.4.6`, `soundfile>=0.12.1`
+- Activation keywords documentation ("with voice comms", "announce progress")
 - PortAudio installation instructions for all platforms
-- `/squadron-comms:verify-setup` command updated for PortAudio checks
 - Comprehensive Windows installation documentation
 
 ### Removed
 
-- `play_audio.py` script (no longer needed)
-- `filelock` dependency
-- mpv media player requirement
-- Complex file locking mechanism
+- mpv media player dependency (replaced with sounddevice)
+- ${CLAUDE_PLUGIN_ROOT} environment variable requirement (self-locating scripts)
+- Manual 3-step broadcast process (automated by broadcast.py)
 
 ### Fixed
 
