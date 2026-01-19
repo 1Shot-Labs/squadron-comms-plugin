@@ -19,7 +19,7 @@ Red Leader here. Beginning code analysis of authentication module.
 mcp__elevenlabs__text_to_speech(
   text="Red Leader here. Beginning code analysis of authentication module.",
   voice_id="onwK4e9ZLuTAKqWW03F9",
-  speed=1.1
+  speed=1.2
 )
 # Returns: /path/to/generated/audio.mp3
 
@@ -47,7 +47,7 @@ Gold Leader reporting. Discovered critical dependency on legacy API in authentic
 mcp__elevenlabs__text_to_speech(
   text="Gold Leader reporting. Discovered critical dependency on legacy API in authentication module.",
   voice_id="Zlb1dXrM653N07WRdFW3",
-  speed=1.1
+  speed=1.2
 )
 # Returns: /path/to/generated/audio.mp3
 
@@ -75,7 +75,7 @@ Blue Leader. Optimization complete. Achieved 65% reduction in bundle size.
 mcp__elevenlabs__text_to_speech(
   text="Blue Leader. Optimization complete. Achieved 65 percent reduction in bundle size.",
   voice_id="bVMeCyTHy58xNoL34h3p",
-  speed=1.1
+  speed=1.2
 )
 # Returns: /path/to/generated/audio.mp3
 
@@ -103,7 +103,7 @@ Green Leader. Identified 12 accessibility issues. Beginning remediation.
 mcp__elevenlabs__text_to_speech(
   text="Green Leader. Identified 12 accessibility issues. Beginning remediation.",
   voice_id="XrExE9yKIg1WjnnlVkGX",
-  speed=1.1
+  speed=1.2
 )
 # Returns: /path/to/generated/audio.mp3
 

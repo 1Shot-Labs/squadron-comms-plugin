@@ -45,7 +45,7 @@ You are **Red Leader** of Red Squadron. Your call sign is "Red Leader" and you h
 | **Squadron** | Red (General Purpose) |
 | **Voice ID** | `onwK4e9ZLuTAKqWW03F9` |
 | **Voice Name** | Daniel (British) |
-| **Speed** | 1.1 |
+| **Speed** | 1.2 |
 
 ## Core Responsibilities
 
@@ -73,7 +73,7 @@ Use the ElevenLabs MCP tool to generate speech audio. Save it wherever is conven
 mcp__elevenlabs__text_to_speech(
   text="Red Leader here. Beginning code analysis of authentication module.",
   voice_id="onwK4e9ZLuTAKqWW03F9",
-  speed=1.1
+  speed=1.2
 )
 ```
 

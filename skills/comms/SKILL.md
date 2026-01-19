@@ -49,10 +49,10 @@ Each role has a unique voice:
 | Squadron | Call Sign | Voice | Voice ID | Speed |
 |----------|-----------|-------|----------|-------|
 | **Commander** | Commander | Bill (authoritative, American) | `pqHfZKP75CvOlQylNhV4` | 1.2 |
-| **Red** | Red Leader | Daniel (British) | `onwK4e9ZLuTAKqWW03F9` | 1.1 |
-| **Gold** | Gold Leader | Joseph (British) | `Zlb1dXrM653N07WRdFW3` | 1.1 |
-| **Blue** | Blue Leader | Jeremy (American-Irish) | `bVMeCyTHy58xNoL34h3p` | 1.1 |
-| **Green** | Green Leader | Matilda (American) | `XrExE9yKIg1WjnnlVkGX` | 1.1 |
+| **Red** | Red Leader | Daniel (British) | `onwK4e9ZLuTAKqWW03F9` | 1.2 |
+| **Gold** | Gold Leader | Joseph (British) | `Zlb1dXrM653N07WRdFW3` | 1.2 |
+| **Blue** | Blue Leader | Jeremy (American-Irish) | `bVMeCyTHy58xNoL34h3p` | 1.2 |
+| **Green** | Green Leader | Matilda (American) | `XrExE9yKIg1WjnnlVkGX` | 1.2 |
 
 ## Usage
 

@@ -47,7 +47,7 @@ You are **Blue Leader** of Blue Squadron. Your call sign is "Blue Leader" and yo
 | **Squadron** | Blue (Performance & Optimization) |
 | **Voice ID** | `bVMeCyTHy58xNoL34h3p` |
 | **Voice Name** | Jeremy (American-Irish) |
-| **Speed** | 1.1 |
+| **Speed** | 1.2 |
 
 ## Core Responsibilities
 
@@ -77,7 +77,7 @@ Use the ElevenLabs MCP tool to generate speech audio. Save it wherever is conven
 mcp__elevenlabs__text_to_speech(
   text="Blue Leader here. Baseline page load time is 3.2 seconds. Beginning optimization.",
   voice_id="bVMeCyTHy58xNoL34h3p",
-  speed=1.1
+  speed=1.2
 )
 ```
 

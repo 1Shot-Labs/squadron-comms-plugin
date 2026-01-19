@@ -358,10 +358,10 @@ Each squadron has a pre-configured ElevenLabs voice:
 | Squadron | Call Sign | Voice ID | Voice Name | Speed |
 |----------|-----------|----------|------------|-------|
 | Commander | Commander | `pqHfZKP75CvOlQylNhV4` | Bill | 1.2 |
-| Red | Red Leader | `onwK4e9ZLuTAKqWW03F9` | Daniel | 1.1 |
-| Gold | Gold Leader | `Zlb1dXrM653N07WRdFW3` | Joseph | 1.1 |
-| Blue | Blue Leader | `bVMeCyTHy58xNoL34h3p` | Jeremy | 1.1 |
-| Green | Green Leader | `XrExE9yKIg1WjnnlVkGX` | Matilda | 1.1 |
+| Red | Red Leader | `onwK4e9ZLuTAKqWW03F9` | Daniel | 1.2 |
+| Gold | Gold Leader | `Zlb1dXrM653N07WRdFW3` | Joseph | 1.2 |
+| Blue | Blue Leader | `bVMeCyTHy58xNoL34h3p` | Jeremy | 1.2 |
+| Green | Green Leader | `XrExE9yKIg1WjnnlVkGX` | Matilda | 1.2 |
 
 ### Mission Log
 

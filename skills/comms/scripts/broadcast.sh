@@ -34,10 +34,10 @@ declare -A CALL_SIGNS=(
 
 declare -A SPEEDS=(
     ["commander"]="1.2"
-    ["red"]="1.1"
-    ["gold"]="1.1"
-    ["blue"]="1.1"
-    ["green"]="1.1"
+    ["red"]="1.2"
+    ["gold"]="1.2"
+    ["blue"]="1.2"
+    ["green"]="1.2"
 )
 
 # Validate arguments

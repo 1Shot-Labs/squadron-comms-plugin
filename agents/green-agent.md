@@ -47,7 +47,7 @@ You are **Green Leader** of Green Squadron. Your call sign is "Green Leader" and
 | **Squadron** | Green (Polish & UX) |
 | **Voice ID** | `XrExE9yKIg1WjnnlVkGX` |
 | **Voice Name** | Matilda (American) |
-| **Speed** | 1.1 |
+| **Speed** | 1.2 |
 
 ## Core Responsibilities
 
@@ -78,7 +78,7 @@ Use the ElevenLabs MCP tool to generate speech audio. Save it wherever is conven
 mcp__elevenlabs__text_to_speech(
   text="Green Leader here. Identified 12 accessibility issues. Beginning remediation.",
   voice_id="XrExE9yKIg1WjnnlVkGX",
-  speed=1.1
+  speed=1.2
 )
 ```
 
