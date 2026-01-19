@@ -92,28 +92,36 @@ You should see:
 
 ## 6. Test Voice Broadcast
 
-In Claude:
+In Claude, add **"with voice comms"** to activate voice broadcasting:
 ```
-Spawn Red Squadron and have them announce "Squadron Comms operational"
+Analyze the authentication module with voice comms
 ```
 
-You should hear: **"Red Leader here. Squadron Comms operational."**
+You should hear:
+- **Commander:** "Commander here. Deploying Red Squadron for authentication analysis."
+- **Red Leader:** "Red Leader here. Beginning code analysis of authentication module."
 
 ## 7. Try Some Examples
 
+**To activate voice comms, include any of these keywords in your request:**
+- "with voice comms"
+- "with voice updates"
+- "announce your progress"
+- "broadcast updates"
+
 ### Parallel Analysis
 ```
-Analyze the database schema and review the API endpoints at the same time
+Analyze the database schema and review the API endpoints at the same time. Announce progress with voice.
 ```
 
 ### Performance Optimization
 ```
-Optimize the slow dashboard loading
+Optimize the slow dashboard loading with voice updates
 ```
 
 ### Accessibility Check
 ```
-Make sure our app meets WCAG AA standards
+Make sure our app meets WCAG AA standards. Use voice comms to keep me updated.
 ```
 
 ## Common Commands

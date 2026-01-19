@@ -230,23 +230,50 @@ You should see the squadron agents listed:
 
 ## Usage
 
+### How to Activate Voice Comms
+
+To use voice broadcasting, simply **include a voice-related keyword in your request**:
+
+**Activation Keywords:**
+- "with voice comms"
+- "with voice updates"
+- "announce your progress"
+- "with squadron comms"
+- "broadcast updates"
+
+**Examples:**
+
+```
+Analyze the authentication module with voice comms.
+```
+
+```
+Optimize the database queries and announce your progress.
+```
+
+```
+Run the test suite with voice updates.
+```
+
+The main agent (Commander) and squadron agents will automatically broadcast their progress using distinct voices.
+
 ### Spawning Squadron Agents
 
-Use the Task tool to spawn squadron agents. Each agent automatically has the `comms` skill and will broadcast voice updates.
+Use the Task tool to spawn squadron agents. When voice comms are activated, each agent will broadcast voice updates.
 
-**Example: Spawn Red Squadron for general task**
+**Example: Spawn Red Squadron with voice**
 ```
-Could you analyze the authentication module?
+Could you analyze the authentication module with voice comms?
 
-> I'll deploy Red Squadron for this task.
+> Commander: "Commander here. Deploying Red Squadron for authentication analysis."
 > [Red Squadron broadcasts: "Red Leader here. Beginning code analysis of authentication module."]
 ```
 
 **Example: Deploy multiple squadrons in parallel**
 ```
-Analyze the codebase architecture and optimize the slow database queries.
+Analyze the codebase architecture and optimize the slow database queries. Announce progress with voice.
 
-> I'll deploy Gold Squadron for architecture analysis and Blue Squadron for database optimization.
+> Commander: "Commander here. Deploying Gold and Blue squadrons for parallel operations."
 > [Gold broadcasts: "Gold Leader here. Initiating architecture analysis."]
 > [Blue broadcasts: "Blue Leader here. Beginning database query optimization."]
 ```
