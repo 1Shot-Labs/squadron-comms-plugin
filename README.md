@@ -1,6 +1,6 @@
 # Squadron Comms Plugin
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/1Shot-Labs/squadron-comms-plugin/releases)
+[![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](https://github.com/1Shot-Labs/squadron-comms-plugin/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-blueviolet.svg)](https://claude.ai/code)
 [![ElevenLabs](https://img.shields.io/badge/ElevenLabs-TTS-green.svg)](https://elevenlabs.io)
@@ -28,88 +28,77 @@ A Claude Code plugin that enables voice broadcasting for coordinated multi-agent
 ### 1. Prerequisites
 
 - Claude Code CLI installed
-- Python 3.8+ (for cross-platform file locking)
 - ElevenLabs API key ([get one here](https://elevenlabs.io))
-- `mpv` media player for audio playback
+- PortAudio library (for audio playback)
 
-**Install mpv:**
+**Install PortAudio:**
 
 <details>
 <summary><strong>macOS</strong></summary>
 
+PortAudio usually installs automatically when the ElevenLabs MCP server is installed. If you encounter audio playback issues:
+
 ```bash
-brew install mpv
+brew install portaudio
 ```
 
 Verify installation:
 ```bash
-mpv --version
+brew list portaudio
 ```
 </details>
 
 <details>
 <summary><strong>Linux (Ubuntu/Debian)</strong></summary>
 
+Install PortAudio library:
+
 ```bash
-sudo apt update
-sudo apt install mpv
+sudo apt-get update
+sudo apt-get install libportaudio2
+```
+
+For development headers (if needed):
+```bash
+sudo apt-get install portaudio19-dev
 ```
 
 Verify installation:
 ```bash
-mpv --version
+dpkg -l | grep libportaudio2
 ```
 </details>
 
 <details>
 <summary><strong>Linux (Fedora/RHEL)</strong></summary>
 
+Install PortAudio library:
+
 ```bash
-sudo dnf install mpv
+sudo dnf install portaudio
 ```
 
 Verify installation:
 ```bash
-mpv --version
+rpm -qa | grep portaudio
 ```
 </details>
 
 <details>
 <summary><strong>Windows</strong></summary>
 
-**Option 1: Using Scoop (Recommended)**
-```powershell
-# Install Scoop if not already installed
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-irm get.scoop.sh | iex
+PortAudio usually installs automatically when the ElevenLabs MCP server is installed via `uvx elevenlabs-mcp`.
 
-# Install mpv
-scoop install mpv
-```
+If you encounter "PortAudio library not found" errors:
 
-**Option 2: Using Chocolatey**
-```powershell
-# Run as Administrator
-choco install mpv
-```
+1. Ensure Python is installed from [python.org](https://www.python.org/downloads/)
+2. Reinstall audio packages:
+   ```powershell
+   pip install --force-reinstall sounddevice soundfile
+   ```
+3. Restart Claude Code
 
-**Option 3: Manual Installation**
-1. Download mpv from [mpv.io/installation](https://mpv.io/installation/)
-2. Extract the archive to `C:\Program Files\mpv`
-3. Add to PATH:
-   - Open System Properties → Environment Variables
-   - Under System variables, select `Path` → Edit
-   - Add new entry: `C:\Program Files\mpv`
-   - Click OK
-
-Verify installation:
-```powershell
-mpv --version
-# or if using mpv.net:
-mpvnet --version
-```
-
-> **Note:** The plugin automatically detects both `mpv` and `mpvnet.exe` variants on Windows, so either will work.
+> **Note:** On Windows, PortAudio typically installs automatically as part of the sounddevice package dependencies. Manual installation is rarely needed.
 
 </details>
 
@@ -208,20 +197,7 @@ echo %ELEVENLABS_API_KEY%
 ```
 </details>
 
-### 4. Install Python Dependencies
-
-The plugin requires the `filelock` library for cross-platform file locking:
-
-```bash
-pip install filelock
-```
-
-Or install from the plugin's requirements file:
-```bash
-pip install -r ~/.claude/plugins/squadron-comms/requirements.txt
-```
-
-### 5. Verify Installation
+### 4. Verify Installation
 
 Run the setup verification command to check all requirements:
 ```bash
@@ -230,13 +206,12 @@ Run the setup verification command to check all requirements:
 
 This will verify:
 - Environment variables are set
-- MPV is installed
-- Python and filelock are available
+- PortAudio is installed and working
 - ElevenLabs API connection works
 - Squadron voice profiles are accessible
 - File permissions are correct
 
-### 6. Check Agents Loaded
+### 5. Check Agents Loaded
 
 **Important:** After installing the plugin, you need to **restart Claude Code** for the agents to become available.
 
@@ -313,8 +288,8 @@ Verify that the plugin is properly configured and all requirements are met:
 
 Checks:
 - Environment variables (ELEVENLABS_API_KEY)
-- MPV installation
-- Python and filelock library
+- PortAudio installation
+- ElevenLabs MCP server connection
 - ElevenLabs API connection
 - Squadron voice availability
 - File permissions

@@ -42,29 +42,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - mpv media player
 - mcp-eleven-labs MCP server
 
-## [Unreleased]
+## [1.1.0] - 2025-01-18
+
+### Changed - Major Redesign
+
+- **Switched to ElevenLabs MCP play_audio tool** for all audio playback
+  - Removes dependency on mpv media player
+  - Uses PortAudio library instead (cross-platform)
+  - Consistent behavior across Windows, macOS, and Linux
+  - Eliminates GUI window popups during playback
+
+- **Simplified broadcast process** from 2 steps to 3 steps:
+  1. Generate TTS audio with `mcp__elevenlabs__text_to_speech`
+  2. Play audio with `mcp__elevenlabs__play_audio`
+  3. Log broadcast with `log_broadcast.sh`
+
+- **Removed Python file locking**
+  - File locking rarely needed in practice
+  - TTS generation naturally serializes broadcasts
+  - Simplified codebase and dependencies
 
 ### Added
 
-- Cross-platform file locking using Python `filelock` library
-- `/squadron-comms:verify-setup` command for comprehensive installation validation
-- `play_audio.py` script for Windows-compatible audio playback and logging
-- `requirements.txt` for Python dependencies
-- Windows-specific installation instructions across all documentation
+- `log_broadcast.sh` - Simple mission logging script
+- PortAudio installation instructions for all platforms
+- `/squadron-comms:verify-setup` command updated for PortAudio checks
+- Comprehensive Windows installation documentation
 
-### Changed
+### Removed
 
-- File locking now uses Python instead of Unix-only `flock` command
-- All squadron agents now use Opus model instead of Sonnet
-- Improved documentation accuracy for environment variable setup
-- Added Python 3.8+ as a prerequisite
+- `play_audio.py` script (no longer needed)
+- `filelock` dependency
+- mpv media player requirement
+- Complex file locking mechanism
 
 ### Fixed
 
-- Windows compatibility for file locking (flock doesn't exist on Windows)
+- Windows encoding issues (replaced Unicode symbols with ASCII)
 - ElevenLabs MCP package name corrected to `elevenlabs-mcp`
-- Documentation now correctly states to restart Claude Code, not terminal
-- Plugin.json validation errors resolved
+- Documentation accuracy (restart Claude Code, not terminal)
+- Plugin.json validation errors
+- All squadron agents now use Opus model
 
 ### Planned
 

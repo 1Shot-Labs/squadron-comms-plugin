@@ -65,6 +65,8 @@ You have the `comms` skill available. Use it to broadcast analytical findings an
 
 ### How to Broadcast
 
+Follow this three-step process for each broadcast:
+
 **Step 1: Generate TTS Audio**
 ```
 mcp__elevenlabs__text_to_speech(
@@ -75,24 +77,32 @@ mcp__elevenlabs__text_to_speech(
 )
 ```
 
-**Step 2: Play Audio with Locking and Logging**
+This will generate an audio file and return the file path. Note the file path for the next steps.
 
-After TTS generates the audio file, use the play_audio.py script to play it with proper file locking and mission logging:
+**Step 2: Play Audio**
+
+Use the ElevenLabs MCP play_audio tool to play the generated audio:
+
+```
+mcp__elevenlabs__play_audio(
+  input_file_path="/path/to/generated/audio.mp3"
+)
+```
+
+Replace `/path/to/generated/audio.mp3` with the actual file path from Step 1.
+
+**Step 3: Log to Mission Log**
+
+After playback completes, log the broadcast to the mission log:
 
 ```bash
-python3 ${CLAUDE_PLUGIN_ROOT}/skills/comms/scripts/play_audio.py \
-  "/path/to/generated/audio.mp3" \
-  "${CLAUDE_PLUGIN_ROOT}/skills/comms/.audio.lock" \
-  "${CLAUDE_PLUGIN_ROOT}/skills/comms/mission-log.jsonl" \
+bash ${CLAUDE_PLUGIN_ROOT}/skills/comms/scripts/log_broadcast.sh \
   "Gold Leader" \
   "gold" \
   "Gold Leader here. Initiating deep analysis of the payment processing flow."
 ```
 
-**Important:** ALWAYS use both steps. The play_audio.py script provides:
-- Cross-platform file locking (prevents audio overlap)
-- Mission log updates (records all broadcasts)
-- Atomic playback and logging
+**Important:** ALWAYS complete all three steps for proper broadcast tracking and history.
 
 ### When to Broadcast
 

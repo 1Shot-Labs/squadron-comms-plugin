@@ -25,47 +25,39 @@ If set but empty:
 If set with a value:
 - [OK] **PASSED**: Environment variable configured (show first 8 chars only for security)
 
-### 2. Check MPV Installation
+### 2. Check PortAudio Installation
 
-Test if mpv is installed and accessible using the plugin's detection logic:
+Test if PortAudio is installed and the ElevenLabs MCP play_audio tool works:
 
-```bash
-python3 ${CLAUDE_PLUGIN_ROOT}/skills/comms/scripts/play_audio.py --check-mpv
-```
+Try to play a test audio file using the MCP tool (if available):
+- Use `mcp__elevenlabs__play_audio` with a sample file
 
-Or manually check:
-- Unix: `which mpv` or `which mpvnet`
-- Windows: `where mpv` or `where mpvnet.exe`
-- Run: `mpv --version` or `mpvnet --version` to verify it works
+Or manually check PortAudio:
+- **Linux**: `dpkg -l | grep libportaudio2`
+- **macOS**: `brew list portaudio`
+- **Windows**: Check if Python sounddevice package works: `python -c "import sounddevice"`
 
-The plugin supports multiple mpv variants:
-- `mpv` (standard on Unix, available via Scoop/Chocolatey on Windows)
-- `mpvnet.exe` (mpv.net on Windows)
-- Common installation paths on Windows are checked automatically
+If PortAudio not found:
+- [ERROR] **FAILED**: PortAudio not installed
+- **Linux**: Install with `sudo apt-get install libportaudio2`
+- **macOS**: Install with `brew install portaudio`
+- **Windows**: Reinstall with `pip install --force-reinstall sounddevice soundfile`
 
-If not found:
-- [ERROR] **FAILED**: mpv not installed or not in PATH
-- Provide installation instructions for user's platform
+If PortAudio found:
+- [OK] **PASSED**: PortAudio installed and working
+
+### 3. Check Bash Availability
+
+Verify bash is available for mission logging:
+- Run: `bash --version`
+
+If not found (rare on Windows):
+- [WARN] **WARNING**: bash not available
+- Mission logging may not work
+- Install Git Bash for Windows
 
 If found:
-- [OK] **PASSED**: mpv installed at [path] (show version and variant)
-
-### 3. Check Python and filelock Library
-
-Verify Python and the filelock library:
-- Run: `python3 --version` or `python --version`
-- Run: `python3 -c "import filelock; print(filelock.__version__)"` or `python -c "import filelock; print(filelock.__version__)"`
-
-If Python not found:
-- [ERROR] **FAILED**: Python not installed
-- Provide installation instructions
-
-If filelock not found:
-- [WARN] **WARNING**: filelock library not installed
-- Instruct: `pip install filelock` or `pip install -r ${CLAUDE_PLUGIN_ROOT}/requirements.txt`
-
-If both found:
-- [OK] **PASSED**: Python [version], filelock [version]
+- [OK] **PASSED**: bash available for logging
 
 ### 4. Check ElevenLabs MCP Server Connection
 
@@ -138,8 +130,9 @@ Squadron Comms Setup Verification
 ═════════════════════════════════════════════
 
 [OK]   ELEVENLABS_API_KEY:     Configured (sk_daf7a...)
-[OK]   MPV Media Player:       Installed (mpvnet.exe v7.0.0)
-[OK]   Python & filelock:      Python 3.12.1, filelock 3.20.3
+[OK]   PortAudio Library:      Installed and working
+[OK]   Bash Shell:             Available for logging
+[OK]   ElevenLabs MCP Server:  Connected
 [OK]   ElevenLabs API:         Connected (42 voices available)
 [WARN] Squadron Voices:        4/5 available (Bill missing)
 [OK]   File Permissions:       Write access verified

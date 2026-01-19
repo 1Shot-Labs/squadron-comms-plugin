@@ -4,31 +4,22 @@ Get Squadron Comms Plugin running in 5 minutes.
 
 ## 1. Install Prerequisites
 
-**macOS:**
+**PortAudio Library** (required for audio playback):
+
+**Linux (Ubuntu/Debian):**
 ```bash
-brew install mpv
+sudo apt-get install libportaudio2
 ```
 
-**Linux:**
+**macOS:**
 ```bash
-sudo apt install mpv                # Ubuntu/Debian
-sudo dnf install mpv                # Fedora
+brew install portaudio
 ```
 
 **Windows:**
+PortAudio usually installs automatically. If you get errors, run:
 ```powershell
-# Using Scoop (recommended)
-scoop install mpv
-
-# Or using Chocolatey (as Administrator)
-choco install mpv
-```
-
-*Manual installation: Download from [mpv.io](https://mpv.io/installation/) and add to PATH*
-
-**Install Python dependencies:**
-```bash
-pip install filelock
+pip install --force-reinstall sounddevice soundfile
 ```
 
 ## 2. Get ElevenLabs API Key

@@ -22,25 +22,31 @@ Verify installation:
 claude --version
 ```
 
-### 2. Python 3.8+
+### 2. PortAudio Library
 
-The plugin requires Python for cross-platform file locking.
+The plugin uses the ElevenLabs MCP server which requires PortAudio for audio playback.
 
-**Check if Python is installed:**
+**Linux (Ubuntu/Debian):**
 ```bash
-python3 --version
-# or on Windows:
-python --version
+sudo apt-get install libportaudio2
 ```
 
-**Install Python if needed:**
-- **Windows**: Download from [python.org](https://www.python.org/downloads/)
-- **macOS**: `brew install python3` or download from python.org
-- **Linux**: Usually pre-installed, or `sudo apt install python3` (Ubuntu/Debian)
-
-**Install filelock library:**
+**Linux (Fedora/RHEL):**
 ```bash
-pip install filelock
+sudo dnf install portaudio
+```
+
+**macOS:**
+```bash
+brew install portaudio
+```
+
+Usually installs automatically with ElevenLabs MCP, but manual installation may be needed.
+
+**Windows:**
+PortAudio typically installs automatically with the sounddevice package. If you encounter issues:
+```powershell
+pip install --force-reinstall sounddevice soundfile
 ```
 
 ### 3. ElevenLabs API Key
@@ -48,61 +54,7 @@ pip install filelock
 1. Sign up for an ElevenLabs account at [elevenlabs.io](https://elevenlabs.io)
 2. Navigate to your profile settings
 3. Generate an API key
-4. Copy the API key (you'll need it in step 4 of installation)
-
-### 4. MPV Media Player
-
-The plugin uses MPV to play generated audio.
-
-**macOS:**
-```bash
-brew install mpv
-```
-
-**Ubuntu/Debian:**
-```bash
-sudo apt update
-sudo apt install mpv
-```
-
-**Fedora/RHEL:**
-```bash
-sudo dnf install mpv
-```
-
-**Arch Linux:**
-```bash
-sudo pacman -S mpv
-```
-
-**Windows:**
-
-Option 1 - Using Scoop (Recommended):
-```powershell
-# Install Scoop if not already installed
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-irm get.scoop.sh | iex
-
-# Install mpv
-scoop install mpv
-```
-
-Option 2 - Using Chocolatey:
-```powershell
-# Run as Administrator
-choco install mpv
-```
-
-Option 3 - Manual Installation:
-1. Download mpv from [mpv.io/installation](https://mpv.io/installation/)
-2. Extract to `C:\Program Files\mpv`
-3. Add to PATH via System Properties → Environment Variables
-4. Add new System variable Path entry: `C:\Program Files\mpv`
-
-Verify MPV installation:
-```bash
-mpv --version
-```
+4. Copy the API key (you'll need it in the installation steps)
 
 ## Installation Methods
 
@@ -125,17 +77,7 @@ Then in Claude:
 /plugin install squadron-comms
 ```
 
-**Step 3: Install Python dependencies**
-```bash
-pip install filelock
-```
-
-Or install from the plugin's requirements file:
-```bash
-pip install -r ~/.claude/plugins/squadron-comms/requirements.txt
-```
-
-**Step 4: Configure ElevenLabs API key**
+**Step 3: Configure ElevenLabs API key**
 
 **macOS / Linux:**
 ```bash
@@ -174,7 +116,7 @@ Or set via GUI:
 5. Click OK
 6. Restart Claude Code
 
-**Step 5: Verify installation**
+**Step 4: Verify installation**
 
 **Important:** Restart Claude Code after installing the plugin for agents to load.
 
@@ -191,8 +133,8 @@ Run the setup verification command:
 
 This comprehensive check will verify:
 - ELEVENLABS_API_KEY is set
-- MPV is installed and working
-- Python and filelock are available
+- PortAudio is installed and working
+- ElevenLabs MCP server connection works
 - ElevenLabs API connection works
 - Squadron voice profiles are accessible
 - File permissions are correct

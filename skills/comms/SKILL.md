@@ -22,7 +22,7 @@ Enables voice broadcasting using ElevenLabs text-to-speech for real-time audio u
 
 The `comms` skill allows you to broadcast voice announcements to keep users informed of your progress. All broadcasts are:
 - Converted to speech using ElevenLabs TTS
-- Played through system audio
+- Played through system audio using the ElevenLabs MCP play_audio tool
 - Logged to a mission log file (JSONL format)
 
 ## Squadron Voice Profiles
@@ -41,23 +41,15 @@ Each squadron has a unique voice:
 
 ### Basic Broadcasting
 
-To broadcast a voice message, follow these steps:
+To broadcast a voice message, follow these three steps:
 
-1. **Identify Your Squadron**: Determine your call sign and voice ID from the table above
-2. **Generate TTS**: Use ElevenLabs to convert your message to speech
-3. **Play & Log**: Play the audio and append to mission log
+1. **Generate TTS Audio**: Use ElevenLabs to convert your message to speech
+2. **Play Audio**: Use the ElevenLabs MCP play_audio tool
+3. **Log Broadcast**: Append to mission log for history
 
 ### Example: Red Squadron Broadcast
 
-```markdown
-I'll broadcast a mission start announcement:
-
-1. Generate TTS using Red Leader's voice
-2. Play the audio with file locking
-3. Log to mission-log.jsonl
-```
-
-**Step 1: Generate TTS**
+**Step 1: Generate TTS Audio**
 ```
 mcp__elevenlabs__text_to_speech(
   text="Red Leader here. Beginning code analysis of authentication module.",
@@ -67,18 +59,30 @@ mcp__elevenlabs__text_to_speech(
 )
 ```
 
-**Step 2: Play & Log (cross-platform)**
+The tool will return the path to the generated audio file (e.g., `/path/to/.audio/tts_Red_L_20250118_123456.mp3`).
+
+**Step 2: Play Audio**
+
+Use the ElevenLabs MCP play_audio tool with the file path from Step 1:
+
+```
+mcp__elevenlabs__play_audio(
+  input_file_path="/path/to/.audio/tts_Red_L_20250118_123456.mp3"
+)
+```
+
+**Step 3: Log Broadcast**
+
+After playback, log the broadcast to the mission log:
+
 ```bash
-python3 ${CLAUDE_PLUGIN_ROOT}/skills/comms/scripts/play_audio.py \
-  "/path/to/generated.mp3" \
-  "${CLAUDE_PLUGIN_ROOT}/skills/comms/.audio.lock" \
-  "${CLAUDE_PLUGIN_ROOT}/skills/comms/mission-log.jsonl" \
+bash ${CLAUDE_PLUGIN_ROOT}/skills/comms/scripts/log_broadcast.sh \
   "Red Leader" \
   "red" \
   "Red Leader here. Beginning code analysis of authentication module."
 ```
 
-This Python script provides cross-platform file locking (works on Windows, macOS, Linux) and handles both audio playback and mission logging atomically.
+This creates a JSONL entry with timestamp, call sign, squadron, and message.
 
 ### When to Broadcast
 
@@ -106,17 +110,16 @@ Example: "Green Leader. Mission complete. All accessibility issues resolved."
 Example: "Red Leader. Encountered authentication error. Investigating."
 ```
 
-## File Locking
+## Audio Playback
 
-The plugin uses Python's `filelock` library to prevent audio overlap when multiple agents broadcast simultaneously. This works across all platforms (Windows, macOS, Linux).
+The plugin uses the **ElevenLabs MCP play_audio tool** for audio playback. This provides:
+- Cross-platform audio playback (Windows, macOS, Linux)
+- Consistent behavior across all platforms
+- Built-in audio device handling via PortAudio
+- No external media player dependencies
 
-The `play_audio.py` script automatically handles:
-- File locking to ensure only one broadcast at a time
-- Audio playback via mpv
-- Mission log updates
-- Error handling
-
-This ensures only one agent broadcasts at a time, regardless of platform.
+**Note on Concurrent Broadcasts:**
+While agents can technically broadcast simultaneously, in practice this is rare. The ElevenLabs TTS generation is sequential enough that broadcasts naturally queue. If you need strict synchronization, consider spawning agents with delays between them.
 
 ## Mission Log Format
 
@@ -154,12 +157,10 @@ The comms skill maintains these files:
 skills/comms/
 ├── SKILL.md                    # This documentation
 ├── scripts/
-│   ├── play_audio.py          # Cross-platform audio playback with locking
-│   └── broadcast.sh           # Legacy bash helper (Unix only)
+│   └── log_broadcast.sh       # Mission log appender
 ├── examples/
 │   └── broadcast-examples.md  # Usage examples
 ├── .audio/                     # Generated TTS audio files
-├── .audio.lock                 # File lock for audio playback
 └── mission-log.jsonl          # Broadcast history
 ```
 
@@ -169,25 +170,29 @@ skills/comms/
 Run `/squadron-comms:verify-setup` to check all requirements and get specific troubleshooting guidance.
 
 **Audio not playing:**
-- Ensure `mpv` is installed: `which mpv` (Unix) or `where mpv` (Windows)
 - Check ElevenLabs API key is configured: `echo $ELEVENLABS_API_KEY` (Unix) or `echo %ELEVENLABS_API_KEY%` (Windows)
-- Verify audio file was generated successfully
+- Verify PortAudio is installed:
+  - Linux: `dpkg -l | grep libportaudio2` or install with `sudo apt-get install libportaudio2`
+  - macOS: Usually auto-installs with ElevenLabs MCP
+  - Windows: Usually auto-installs with ElevenLabs MCP
 - On Windows: Restart Claude Code after setting environment variables
+- Verify audio file was generated successfully
 
-**Python/filelock errors:**
-- Ensure Python 3 is installed: `python3 --version` or `python --version`
-- Install filelock: `pip install filelock` or `pip install -r ${CLAUDE_PLUGIN_ROOT}/requirements.txt`
-- The filelock library is required for cross-platform file locking
-
-**File lock errors:**
-- The lock prevents simultaneous broadcasts - this is expected behavior
-- Wait for current broadcast to complete before next one
-- If lock is stuck, remove: `${CLAUDE_PLUGIN_ROOT}/skills/comms/.audio.lock`
+**PortAudio errors:**
+- **Linux**: Install PortAudio library: `sudo apt-get install libportaudio2 portaudio19-dev`
+- **macOS**: Install via Homebrew: `brew install portaudio`
+- **Windows**: PortAudio usually installs automatically, but if issues persist, reinstall Python audio packages
+- Restart Claude Code after installing PortAudio
 
 **Mission log not updating:**
 - Check write permissions on `mission-log.jsonl`
 - Ensure `${CLAUDE_PLUGIN_ROOT}` resolves correctly
-- Verify play_audio.py script has execute permissions
+- Verify log_broadcast.sh script has execute permissions: `chmod +x ${CLAUDE_PLUGIN_ROOT}/skills/comms/scripts/log_broadcast.sh`
+
+**ElevenLabs MCP connection errors:**
+- Verify API key is set as a Windows User environment variable (not just terminal session)
+- Check internet connection
+- Verify ElevenLabs API status
 
 ## Advanced Usage
 
